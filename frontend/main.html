@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TrafficTracking</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .map-container {
+            width: 600px;
+            height: 600px;
+            border: 3px solid #3498db;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>TrafficTracking</h1>
+    <div class="controls">
+        <select id="ciudades">
+            <option value="madrid" data-lat="40.416775" data-lng="-3.703790">Madrid Centro</option>
+            <option value="barajas" data-lat="40.472244" data-lng="-3.560891">Aeropuerto Barajas</option>
+            <option value="chamartin" data-lat="40.466443" data-lng="-3.684564">Chamartín</option>
+            <option value="retiro" data-lat="40.414572" data-lng="-3.681706">Parque Retiro</option>
+        </select>
+        <button onclick="cambiarUbicacion()">Cambiar ubicación</button>
+    </div>
+
+    
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+
+    <script>
+        let map;
+        function cambiarUbicacion() {
+            const select = document.getElementById('ciudades');
+            const opcionSeleccionada = select.options[select.selectedIndex];
+            const nuevaLat = parseFloat(opcionSeleccionada.dataset.lat);
+            const nuevaLng = parseFloat(opcionSeleccionada.dataset.lng);
+
+            // Actualizar el centro del mapa con animación
+            map.panTo({ lat: nuevaLat, lng: nuevaLng });
+
+            // Opcional: Ajustar zoom según necesidad
+            map.setZoom(14);
+        }
+        function initMap() {
+             map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 6,
+                center: { lat: 40.416775, lng: -3.703790 }, // Coordenadas de Madrid
+                mapTypeControl: false,
+                streetViewControl: false
+            });
+
+            const trafficLayer = new google.maps.TrafficLayer();
+            trafficLayer.setMap(map);
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa1sj6iVrv3c54ae4Ga6I__SOS_rPd7wQ&callback=initMap"
+        async defer></script>
+</body>
+
+</html>
