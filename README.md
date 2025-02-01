@@ -5,3 +5,7 @@ traffic layer   https://developers.google.com/maps/documentation/javascript/exam
 
 ejemplo 
 https://jsfiddle.net/gh/get/library/pure/googlemaps/js-samples/tree/master/dist/samples/layer-traffic/jsfiddle
+
+
+base de datos desplegar gratis 
+https://supabase.com/pricing
