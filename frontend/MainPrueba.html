@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+   <title>TrafficTracking</title>
+   <style>
+       body {
+           margin: 0;
+           padding: 20px;
+           font-family: Arial, sans-serif;
+           display: flex;
+           justify-content: space-between;
+           background-color: #f0f0f0;
+       }
+
+
+       .sidebar {
+           width: 30%;
+           padding: 20px;
+           background: #f4f4f4;
+           box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+           border-radius: 10px;
+       }
+
+
+       .map-container {
+           width: 65%;
+           height: 600px;
+           border: 3px solid #3498db;
+           border-radius: 10px;
+           overflow: hidden;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+       }
+
+
+       #map {
+           height: 100%;
+           width: 100%;
+       }
+
+
+       h1 {
+           color: #2c3e50;
+           text-align: center;
+           text-transform: uppercase;
+           letter-spacing: 2px;
+       }
+   </style>
+</head>
+
+
+<body>
+   <div class="sidebar">
+       <h1>TrafficTracking</h1>
+       <h2>Búsquedas Más Frecuentes</h2>
+       <ul>
+           <li>Estado del tráfico en tiempo real</li>
+           <li>Accidentes recientes</li>
+           <li>Rutas alternativas</li>
+           <li>Zonas de congestión</li>
+       </ul>
+       <h2>Selecciona Ubicación</h2>
+       <select id="ciudades">
+           <option value="madrid" data-lat="40.416775" data-lng="-3.703790">Madrid Centro</option>
+           <option value="barajas" data-lat="40.472244" data-lng="-3.560891">Aeropuerto Barajas</option>
+           <option value="chamartin" data-lat="40.466443" data-lng="-3.684564">Chamartín</option>
+           <option value="retiro" data-lat="40.414572" data-lng="-3.681706">Parque Retiro</option>
+       </select>
+       <button onclick="cambiarUbicacion()">Cambiar ubicación</button>
+   </div>
+  
+   <div class="map-container">
+       <div id="map"></div>
+   </div>
+
+
+   <script>
+       let map;
+       function cambiarUbicacion() {
+           const select = document.getElementById('ciudades');
+           const opcionSeleccionada = select.options[select.selectedIndex];
+           const nuevaLat = parseFloat(opcionSeleccionada.dataset.lat);
+           const nuevaLng = parseFloat(opcionSeleccionada.dataset.lng);
+
+
+           map.panTo({ lat: nuevaLat, lng: nuevaLng });
+           map.setZoom(14);
+       }
+       function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+               zoom: 6,
+               center: { lat: 40.416775, lng: -3.703790 },
+               mapTypeControl: false,
+               streetViewControl: false
+           });
+
+
+           const trafficLayer = new google.maps.TrafficLayer();
+           trafficLayer.setMap(map);
+       }
+   </script>
+
+
+   <script src="https://maps.googleapis.com/maps/api/js?key=aquiVaLaClavedeAPI&callback=initMap" async defer></script>
+</body>
+
+
+</html>
+
+
+
+
+
