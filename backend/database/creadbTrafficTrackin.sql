@@ -1,4 +1,4 @@
--- este script crea una base de datos simple con una tabla usuarios (id pk, email nn unique, userName nn unique, password nn)
+-- este script crea una base de datos simple con una tabla usuarios (id, email, userName, password)
 CREATE DATABASE IF NOT EXISTS dbTrafficTracking;
 USE dbTrafficTracking;
 
