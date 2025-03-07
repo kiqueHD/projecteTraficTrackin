@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="../css/styleLoginReg.css">
+</head>
+<body>
+
+    <select class="language-selector" onchange="changeLanguage()">
+        <option value="es">Castellano</option>
+        <option value="val">Valencià</option>
+        <option value="en">English</option>
+    </select>
+
+    <div class="container" id="register-container">
+        <h2 id="title-register">Registro</h2>
+        <form action="#" method="POST">
+            <input type="text" name="fullname" id="fullname" placeholder="Nombre completo" required>
+            <input type="email" name="email" id="email" placeholder="Correo electrónico" required>
+            <input type="password" name="password" id="password" placeholder="Contraseña" required>
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar contraseña" required>
+            <input type="submit" class="btn" value="Registrarse" id="submit-register">
+        </form>
+        <div class="register-link">
+            <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+        </div>
+    </div>
+
+</body>
+</html>
