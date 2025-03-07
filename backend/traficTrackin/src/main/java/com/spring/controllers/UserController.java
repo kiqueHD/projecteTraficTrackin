@@ -4,26 +4,26 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import java.util.List;
 
-import com.spring.models.Usuario;
-import com.example.crudusuarios.repository.UsuarioRepository;
+import com.spring.model.User;
+import com.spring.repository.UserRepository;
 
 @RestController
 @RequestMapping("/usuarios")
-public class UsuarioController {
+public class UserController {
 
-    private final UsuarioRepository usuarioRepository;
+    private final UserRepository usuarioRepository;
 
-    public UsuarioController(UsuarioRepository usuarioRepository) {
+    public UserController(UserRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
 
     @GetMapping
-    public List<Usuario> getUsuarios() {
+    public List<User> getUsuarios() {
         return usuarioRepository.findAll();
     }
 
     @PostMapping
-    public Usuario createUsuario(@RequestBody Usuario usuario) {
+    public User createUsuario(@RequestBody User usuario) {
         return usuarioRepository.save(usuario);
     }
 
