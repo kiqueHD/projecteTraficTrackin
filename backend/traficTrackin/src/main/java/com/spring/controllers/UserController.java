@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import java.util.List;
 
-import com.spring.crudusuarios.model.Usuario;
+import com.spring.models.Usuario;
 import com.example.crudusuarios.repository.UsuarioRepository;
 
 @RestController
