@@ -85,17 +85,17 @@ input:focus {
     text-decoration: underline;
 }
 
-.register-link {
+.link {
     margin-top: 15px;
     font-size: 14px;
 }
 
-.register-link a {
+.link a {
     color: #333;
     font-weight: bold;
     text-decoration: none;
 }
 
-.register-link a:hover {
+.link a:hover {
     text-decoration: underline;
 }

@@ -23,10 +23,53 @@
             <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar contraseña" required>
             <input type="submit" class="btn" value="Registrarse" id="submit-register">
         </form>
-        <div class="register-link">
+        <div class="link">
             <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></p>
         </div>
     </div>
-
+    <script>
+        function changeLanguage() {
+            const language = document.querySelector('.language-selector').value;
+    
+            const translations = {
+                es: {
+                    title: 'Registro',
+                    fullnamePlaceholder: 'Nombre de usuario',
+                    emailPlaceholder: 'Correo electrónico',
+                    passwordPlaceholder: 'Contraseña',
+                    confirmPasswordPlaceholder: 'Confirmar contraseña',
+                    submitText: 'Registrarse',
+                    loginPage: '¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a>'
+                },
+                val: {
+                    title: 'Registre',
+                    fullnamePlaceholder: 'Nom d\'usuari',
+                    emailPlaceholder: 'Correu electrònic',
+                    passwordPlaceholder: 'Contrasenya',
+                    confirmPasswordPlaceholder: 'Confirmar contrasenya',
+                    submitText: 'Registrar-se',
+                    loginPage: 'Ja tens compte? <a href="login.html">Inicia sessió ací</a>'
+                },
+                en: {
+                    title: 'Register',
+                    fullnamePlaceholder: 'Username',
+                    emailPlaceholder: 'Email',
+                    passwordPlaceholder: 'Password',
+                    confirmPasswordPlaceholder: 'Confirm Password',
+                    submitText: 'Register',
+                    loginPage: 'Already have an account? <a href="login.html">Login here</a>'
+                }
+            };
+    
+            // Update the text content based on the selected language
+            document.getElementById('title-register').innerText = translations[language].title;
+            document.getElementById('fullname').placeholder = translations[language].fullnamePlaceholder;
+            document.getElementById('email').placeholder = translations[language].emailPlaceholder;
+            document.getElementById('password').placeholder = translations[language].passwordPlaceholder;
+            document.getElementById('confirmPassword').placeholder = translations[language].confirmPasswordPlaceholder;
+            document.getElementById('submit-register').value = translations[language].submitText;
+            document.querySelector('.link p').innerHTML = translations[language].loginPage;
+        }
+    </script>
 </body>
 </html>
