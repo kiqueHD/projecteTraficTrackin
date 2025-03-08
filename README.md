@@ -32,4 +32,5 @@ saldra mucho texto de spring y muchas cosas y queda así la terminal
 
 ahora esta terminal el responsable del proceso del servidor o como se diga, si la cierras, ya se deja de ejecutar
 
-3 los proyectos de spring por defecto se despliegan en el puerto 8080, http://localhost:8080/ y ya segun el controlador para ir una pagina tendras que poner una ruta
+3 los proyectos de spring por defecto se despliegan en el puerto 8080, http://localhost:8080/ y ya segun el controlador para ir una pagina tendras que poner una ruta o tambien haciendo
+referencia directa a los recursos en la carpeta static http://localhost:8080/login.html lleva directamente al login sin que este configurado en el homecontroller
