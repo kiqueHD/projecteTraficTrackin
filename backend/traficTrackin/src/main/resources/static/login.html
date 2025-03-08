@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/styleLoginReg.css">
+
+    
+    <!--
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #14120b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .language-selector:hover {
+            background-color: #14120b;
+        }
+
+        .login-container {
+            background-color: #e3c998;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            max-width: 100%;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 15px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .login-container input[type="submit"] {
+            background-color: #14120b;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 15px;
+        }
+
+        .login-container input[type="submit"]:hover {
+            background-color: #a99b6b;
+        }
+
+        .login-container .forgot-password {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .login-container .forgot-password a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .login-container .forgot-password a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    
+    ---->
+</head>
+<body>
+
+    <!-- Selector de idioma -->
+    <select class="language-selector" onchange="changeLanguage()">
+        <option value="es">Castellano</option>
+        <option value="val">Valencià</option>
+        <option value="en">English</option>
+    </select>
+
+    <div class="container" id="login-container">
+        <h2 id="title">Iniciar sesión</h2>
+        <form action="#" method="POST">
+            <input type="text" name="username" id="username" placeholder="Usuario" required>
+            <input type="password" name="password" id="password" placeholder="Contraseña" required>
+            <input type="submit" class="btn "value="Ingresar" id="submit">
+
+        </form>
+        <div class="link" >
+            <p><a id ="forgotPassword" href="#">¿Olvidaste tu contraseña?</a></p>
+            <p id="registerPage">¿No tienes una cuenta? <a id="registerLink" href="register.html">Regístrate</a></p>
+
+        </div>
+    </div>
+
+    <script>
+        function changeLanguage() {
+            const language = document.querySelector('.language-selector').value;
+    
+            const translations = {
+                es: {
+                    title: 'Iniciar sesión',
+                    usernamePlaceholder: 'Usuario',
+                    passwordPlaceholder: 'Contraseña',
+                    submitText: 'Ingresar',
+                    forgotPassword: '¿Olvidaste tu contraseña?',
+                    registerPage: '¿No tienes una cuenta? <a id="registerLink" href="register.html">Regístrate</a>',
+                    registerLink: 'Regístrate'
+                },
+                val: {
+                    title: 'Iniciar sessió',
+                    usernamePlaceholder: 'Usuari',
+                    passwordPlaceholder: 'Contrasenya',
+                    submitText: 'Entrar',
+                    forgotPassword: 'Oblidaste la teua contrasenya?',
+                    registerPage: 'No tincs un compte? <a id="registerLink" href="register.html">Registrar-se</a>',
+                    registerLink: 'Registrar-se'
+                },
+                en: {
+                    title: 'Login',
+                    usernamePlaceholder: 'Username',
+                    passwordPlaceholder: 'Password',
+                    submitText: 'Login',
+                    forgotPassword: 'Forgot your password?',
+                    registerPage: 'Don\'t have an account? <a id="registerLink" href="register.html">Register</a>',
+                    registerLink: 'Register'
+                }
+            };
+    
+            // Update the text content based on the selected language
+            document.getElementById('title').innerText = translations[language].title;
+            document.getElementById('username').placeholder = translations[language].usernamePlaceholder;
+            document.getElementById('password').placeholder = translations[language].passwordPlaceholder;
+            document.getElementById('submit').value = translations[language].submitText;
+            document.getElementById('forgotPassword').innerText = translations[language].forgotPassword;
+            document.getElementById('registerPage').innerHTML = translations[language].registerPage;
+        }
+    </script>
+
+</body>
+</html>
