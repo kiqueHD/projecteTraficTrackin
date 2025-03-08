@@ -31,7 +31,7 @@ import com.spring.repository.UserRepository;
  * 
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 class UserController {
     private final UserRepository repository;
     //se inyecta la dependencia de userRepository que es la interfaz que se encarga de la comunicación con la base de datos
