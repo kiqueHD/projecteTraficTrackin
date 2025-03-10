@@ -7,11 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     @GetMapping("/")
     public String home() {
-        return "redirect:/main.html";  // Redirige a main.html en frontend/pages
-    }
-
-    @GetMapping("/register")
-    public String register() {
-        return "redirect:/register.html";  // Redirige a register.html en frontend/pages
+        return "index";
     }
 }
