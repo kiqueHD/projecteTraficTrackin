@@ -23,6 +23,8 @@ hace falta instalar mvn? no estoy seguro alguien que pruebe a hacer los pasos si
 
 2 irte a la carpeta donde se encuentra el pom.xml y los archivos relacionados a maven
 
+ ./mvnw spring-boot:run
+
 ![image](https://github.com/user-attachments/assets/59072809-265f-4931-b887-6885eb1c548f)
 
 saldra mucho texto de spring y muchas cosas y queda así la terminal
