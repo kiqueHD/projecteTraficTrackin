@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/usuarios";
+const API_URL = "http://localhost:8080/api/users";
 
 async function loadUsers() {
     try {
