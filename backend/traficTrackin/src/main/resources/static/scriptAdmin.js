@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/api/users";
+const API_URL = "http://localhost:8080/users";
 
 async function loadUsers() {
     try {
@@ -37,10 +37,12 @@ document.getElementById("userForm").addEventListener("submit", async function (e
         const response = await fetch(API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ nombre, email })
+            body: JSON.stringify({ userName: nombre, email })
         });
-        console.log("Respuesta del servidor:", response); // Ver la respuesta del servidor
-        if (!response.ok) { alert("Error al agregar usuario"); throw new Error("Error al agregar usuario"); }
+        
+        const responseData = await response.json();
+        console.log("Respuesta del servidor:", responseData);
+                if (!response.ok) { alert("Error al agregar usuario"); throw new Error("Error al agregar usuario"); }
         loadUsers();
     } catch (error) {
         console.error("Error:", error);

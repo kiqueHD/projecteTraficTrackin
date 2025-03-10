@@ -15,23 +15,9 @@ import com.spring.repository.UserRepository;
  * - GET /users/{id}: Recupera un usuario por su ID (Read).
  * - PUT /users/{id}: Actualiza un usuario existente por su ID (Update).
  * - DELETE /users/{id}: Elimina un usuario por su ID (Delete).
- * 
- * Dependencias:
- * - UserRepository: Interfaz para la comunicación con la base de datos.
- * 
- * Métodos:
- * - getAllUsers(): Recupera todos los usuarios de la base de datos.
- * - createUser(User user): Crea un nuevo usuario y lo guarda en la base de datos.
- * - getUserById(Long id): Recupera un usuario por su ID.
- * - updateUser(Long id, User userDetails): Actualiza un usuario existente por su ID.
- * - deleteUser(Long id): Elimina un usuario por su ID.
- * 
- * Excepciones:
- * - RuntimeException: Lanzada cuando no se encuentra un usuario por su ID.
- * 
  */
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 class UserController {
     private final UserRepository repository;
     //se inyecta la dependencia de userRepository que es la interfaz que se encarga de la comunicación con la base de datos
