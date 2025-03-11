@@ -13,8 +13,9 @@ async function loadUsers() {
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td>${user.id}</td>
-                <td>${user.nombre}</td>
+                <td>${user.user_name}</td>
                 <td>${user.email}</td>
+                <td>${user.password}</td>
                 <td><button class="delete" onclick="deleteUser(${user.id})">Eliminar</button></td>
             `;
             tableBody.appendChild(row);
@@ -29,25 +30,26 @@ document.getElementById("userForm").addEventListener("submit", async function (e
 
     const nombre = document.getElementById("nombre").value;
     const email = document.getElementById("email").value;
-
-    console.log("Nombre:", nombre); // Verificar el valor de nombre
-    console.log("Email:", email);   // Verificar el valor de email
+    const password = document.getElementById("password").value;
 
     try {
         const response = await fetch(API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userName: nombre, email })
+            body: JSON.stringify({ user_name: nombre, email, password })
         });
-        
-        const responseData = await response.json();
-        console.log("Respuesta del servidor:", responseData);
-                if (!response.ok) { alert("Error al agregar usuario"); throw new Error("Error al agregar usuario"); }
+
+        if (!response.ok) {
+            alert("Error al agregar usuario");
+            throw new Error("Error al agregar usuario");
+        }
+
         loadUsers();
     } catch (error) {
         console.error("Error:", error);
     }
 });
+
 async function deleteUser(id) {
     try {
         const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });

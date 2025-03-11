@@ -1,7 +1,8 @@
-package com.spring.repository;
+package com.example.traffictracking.repository;
 
+
+import com.example.traffictracking.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.spring.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 }
