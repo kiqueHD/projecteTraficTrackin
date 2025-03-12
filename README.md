@@ -1,7 +1,13 @@
 api javascript google maps
 traffic layer   https://developers.google.com/maps/documentation/javascript/examples/layer-traffic
 
+https://developers.google.com/maps/documentation/javascript/examples/directions-draggable
 
+https://valencia.opendatasoft.com/explore/dataset/parkings/export/?location=12,39.47109,-0.36679&basemap=e4bf90
+
+https://dadesobertes.gva.es/dataset?_groups_limit=0
+
+geo json
 
 ejemplo 
 https://jsfiddle.net/gh/get/library/pure/googlemaps/js-samples/tree/master/dist/samples/layer-traffic/jsfiddle
@@ -33,5 +39,5 @@ saldra mucho texto de spring y muchas cosas y queda así la terminal
 
 ![image](https://github.com/user-attachments/assets/822ed267-9e99-40fd-866a-6f0cdbfeadfa)
 
-se ha inicilizado en un serverlet tomcatwebserver y de para acceder a la unica pantalla funcional de momento seria localhost:8080/admin y esa pantalla deberia estar conectada a la bd 
+se ha inicilizado en un serverlet tomcatwebserver y de para acceder a la unica pantalla funcional de momento seria localhost:8080/admin y esa pantalla deberia estar conectada a la bd, mas rutas en el homecontroller 
 
