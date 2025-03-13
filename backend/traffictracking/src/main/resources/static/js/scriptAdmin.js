@@ -21,7 +21,8 @@ async function loadUsers() {
             tableBody.appendChild(row);
         });
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error al cargar usuarios:", error);
+        alert("Hubo un problema al cargar los usuarios. Por favor, inténtelo de nuevo más tarde.");
     }
 }
 
@@ -46,7 +47,8 @@ document.getElementById("userForm").addEventListener("submit", async function (e
 
         loadUsers();
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error al agregar usuario:", error);
+        alert("Hubo un problema al agregar el usuario. Por favor, inténtelo de nuevo más tarde.");
     }
 });
 
@@ -56,7 +58,8 @@ async function deleteUser(id) {
         if (!response.ok) throw new Error("Error al eliminar usuario");
         loadUsers();
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error al eliminar usuario:", error);
+        alert("Hubo un problema al eliminar el usuario. Por favor, inténtelo de nuevo más tarde.");
     }
 }
 
