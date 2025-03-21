@@ -185,16 +185,61 @@
         }
         function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 6,
-                center: { lat: 40.416775, lng: -3.703790 },
-                mapTypeControl: false,
-                streetViewControl: false
+                zoom: 12,
+                center: { lat: 39.4699, lng: -0.3763 } // Valencia
             });
-
 
             const trafficLayer = new google.maps.TrafficLayer();
             trafficLayer.setMap(map);
+
+            cargarDatos(); // <- Ahora carga los datos al inicializar el mapa
         }
+        function cargarDatos() {
+            /*
+            
+            
+                0, Fluido
+                1, Denso
+                2, Congestionado
+                3, Cortado
+                4, Sin datos
+                5, Paso inferior fluido
+                6, Paso inferior denso
+                7, Paso inferior congestionado
+                8, Paso inferior cortado
+                9, Sin datos (paso inferior) 
+            
+            */
+            fetch("http://localhost:8080/trafico/estado/3")
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Datos recibidos:", data); // Verificar los datos en la consola
+                    data.forEach(punto => {
+                        if (punto.geo_point_2d) {
+                            let lat = punto.geo_point_2d.lat;
+                            let lon = punto.geo_point_2d.lon;
+                            console.log("Añadiendo marcador en:", lat, lon);
+
+                            new google.maps.Marker({
+                                position: { lat: lat, lng: lon },
+                                map: map,
+                                title: punto.denominacion,
+                                icon: {
+                                    path: google.maps.SymbolPath.CIRCLE,
+                                    scale: 6,
+                                    fillColor: "red",
+                                    fillOpacity: 1,
+                                    strokeWeight: 0
+                                }
+                            });
+                        } else {
+                            console.error("Punto sin coordenadas:", punto);
+                        }
+                    });
+                })
+                .catch(error => console.error("Error cargando datos:", error));
+        }
+
 
         function changeLanguage() {
             const language = document.querySelector('.language-selector').value;
@@ -250,8 +295,9 @@
 
         changeLanguage();
     </script>
-    
-    <script src="https://maps.googleapis.com/maps/api/js?key=///API///&callback=initMap" async defer></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATHGvXCJNdfo1uEgJ4NZNt5Mi5Z8bfqXo&callback=initMap"
+        async defer></script>
 </body>
 
 

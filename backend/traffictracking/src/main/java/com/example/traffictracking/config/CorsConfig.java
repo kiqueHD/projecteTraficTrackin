@@ -1,3 +1,5 @@
+
+/** 
 package com.example.traffictracking.config;
 
 
@@ -21,3 +23,4 @@ public class CorsConfig {
         };
     }
 }
+*/
