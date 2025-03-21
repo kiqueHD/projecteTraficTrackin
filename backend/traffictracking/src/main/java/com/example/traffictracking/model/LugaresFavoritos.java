@@ -12,7 +12,6 @@ public class LugaresFavoritos {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User usuario;
-
     private String nombre;
     private Double latitud;
     private Double longitud;

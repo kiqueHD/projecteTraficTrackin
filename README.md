@@ -41,3 +41,13 @@ saldra mucho texto de spring y muchas cosas y queda así la terminal
 
 se ha inicilizado en un serverlet tomcatwebserver y de para acceder a la unica pantalla funcional de momento seria localhost:8080/admin y esa pantalla deberia estar conectada a la bd, mas rutas en el homecontroller 
 
+
+
+
+
+
+https://valencia.aws-ec2-eu-central-1.opendatasoft.com/api/explore/v2.1/catalog/datasets/estat-transit-temps-real-estado-trafico-tiempo-real/records?limit=100 api para consumir datos de trafico
+
+
+
+ejemplo https://iavis.uv.es/wp-content/uploads/2023/07/InformeCuadroMandosMovilidadValencia.pdf

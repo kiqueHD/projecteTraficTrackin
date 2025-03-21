@@ -1,114 +1,258 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="es">
 
 <head>
-   <title>TrafficTracking</title>
-   <style>
-       body {
-           margin: 0;
-           padding: 20px;
-           font-family: Arial, sans-serif;
-           display: flex;
-           justify-content: space-between;
-           background-color: #f0f0f0;
-       }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrafficTracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
 
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 0.5rem 0;
+            display: flex;
+            text-align: center;
+            justify-content: space-between;
+        }
 
-       .sidebar {
-           width: 30%;
-           padding: 20px;
-           background: #f4f4f4;
-           box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-           border-radius: 10px;
-       }
+        header h1 {
+            margin: 0px;
+        }
 
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin-right: 10px;
+        }
 
-       .map-container {
-           width: 65%;
-           height: 600px;
-           border: 3px solid #3498db;
-           border-radius: 10px;
-           overflow: hidden;
-           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-       }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
 
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
 
-       #map {
-           height: 100%;
-           width: 100%;
-       }
+        a:hover {
+            color: aquamarine;
+        }
 
+        main {
+            padding: 20px;
+        }
 
-       h1 {
-           color: #2c3e50;
-           text-align: center;
-           text-transform: uppercase;
-           letter-spacing: 2px;
-       }
-   </style>
+        /*
+        .sidebar {
+            width: 30%;
+            padding: 20px;
+            background: #f4f4f4;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        */
+
+        section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            margin-top: 0;
+        }
+
+        .map-container {
+            width: 65%;
+            height: 600px;
+            border-radius: 10px;
+            overflow: inherit;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #map {
+
+            height: 100%;
+            width: 100%;
+            height: 500px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            width: 100%;
+            max-width: fit-content;
+            padding: 0.3em;
+            margin-top: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
 
 
 <body>
-   <div class="sidebar">
-       <h1>TrafficTracking</h1>
-       <h2>Búsquedas Más Frecuentes</h2>
-       <ul>
-           <li>Estado del tráfico en tiempo real</li>
-           <li>Accidentes recientes</li>
-           <li>Rutas alternativas</li>
-           <li>Zonas de congestión</li>
-       </ul>
-       <h2>Selecciona Ubicación</h2>
-       <select id="ciudades">
-           <option value="madrid" data-lat="40.416775" data-lng="-3.703790">Madrid Centro</option>
-           <option value="barajas" data-lat="40.472244" data-lng="-3.560891">Aeropuerto Barajas</option>
-           <option value="chamartin" data-lat="40.466443" data-lng="-3.684564">Chamartín</option>
-           <option value="retiro" data-lat="40.414572" data-lng="-3.681706">Parque Retiro</option>
-       </select>
-       <button onclick="cambiarUbicacion()">Cambiar ubicación</button>
-   </div>
-  
-   <div class="map-container">
-       <div id="map"></div>
-   </div>
+    <header>
+        <h1 style="display: flex; justify-content: flex-start; margin-left: 1em;">TrafficTracking</h1>
+        <nav class="idiomas">
+            <select id="languageSwitcher" margin-rigth="30px">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+                <option value="val">Valencià</option>
+            </select>
+        </nav>
+    </header>
+    <main>
+
+        <div id="leyenda" style="float:right; width: 30%;">
+            <section>
+                <ul>
+                    <li style="color: #A92727" data-translate="muy_lento">Muy lento</li>
+                    <li style="color: #ED4D42" data-translate="lento">Lento</li>
+                    <li style="color: #FFCF42" data-translate="rapido">Rápido</li>
+                    <li style="color: #16E098" data-translate="muy_rapido">Muy rápido</li>
+                </ul>
+            </section>
+
+            <section>
+                <ul style="list-style-type: none;">
+                    <li>
+                        <div>
+                            <img src="#" alt="símbolo">
+                            Accidente
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+
+        <section style="display: flex; align-items: center; justify-content: flex-start; height: 1em; width: 65%;">
+            <h3 data-translate="ciudades" style="margin-right: 3rem;">Ciudades:</h3>
+            <select name="ciudades" style="margin-right: 3rem;">
+                <option value="madrid" data-lat="40.416775" data-lng="-3.703790" data-translate="madrid_centro">
+                    Madrid
+                    Centro</option>
+                <option value="barajas" data-lat="40.472244" data-lng="-3.560891" data-translate="aeropuerto_barajas">
+                    Aeropuerto Barajas</option>
+                <option value="chamartin" data-lat="40.466443" data-lng="-3.684564">Chamartín</option>
+                <option value="retiro" data-lat="40.414572" data-lng="-3.681706" data-translate="parque_retiro">
+                    Parque
+                    Retiro</option>
+            </select>
+            <button onclick="cambiarUbicacion()" style="margin-right: 3rem;" data-translate="cambiar_ubicacion">Cambiar
+                ubicación</button>
+        </section>
+
+        <section style="height: 500px; width: 65%;">
+            <div id="map"></div>
+        </section>
+    </main>
+
+    <script>
+        let map;
+        function cambiarUbicacion() {
+            const select = document.getElementById('ciudades');
+            const opcionSeleccionada = select.options[select.selectedIndex];
+            const nuevaLat = parseFloat(opcionSeleccionada.dataset.lat);
+            const nuevaLng = parseFloat(opcionSeleccionada.dataset.lng);
 
 
-   <script>
-       let map;
-       function cambiarUbicacion() {
-           const select = document.getElementById('ciudades');
-           const opcionSeleccionada = select.options[select.selectedIndex];
-           const nuevaLat = parseFloat(opcionSeleccionada.dataset.lat);
-           const nuevaLng = parseFloat(opcionSeleccionada.dataset.lng);
-
-
-           map.panTo({ lat: nuevaLat, lng: nuevaLng });
-           map.setZoom(14);
-       }
-       function initMap() {
+            map.panTo({ lat: nuevaLat, lng: nuevaLng });
+            map.setZoom(14);
+        }
+        function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
-               zoom: 6,
-               center: { lat: 40.416775, lng: -3.703790 },
-               mapTypeControl: false,
-               streetViewControl: false
-           });
+                zoom: 6,
+                center: { lat: 40.416775, lng: -3.703790 },
+                mapTypeControl: false,
+                streetViewControl: false
+            });
 
 
-           const trafficLayer = new google.maps.TrafficLayer();
-           trafficLayer.setMap(map);
-       }
-   </script>
+            const trafficLayer = new google.maps.TrafficLayer();
+            trafficLayer.setMap(map);
+        }
 
+        function changeLanguage() {
+            const language = document.querySelector('.language-selector').value;
 
-   <script src="https://maps.googleapis.com/maps/api/js?key=aquiVaLaClavedeAPI&callback=initMap" async defer></script>
+            const translations = {
+                es: {
+                    muy_lento: "Muy lento",
+                    lento: "Lento",
+                    rapido: "Rápido",
+                    muy_rapido: "Muy rápido",
+                    ciudades: "Ciudades: ",
+                    madrid_centro: "Madrid Centro",
+                    aeropuerto_barajas: "Aeropuerto Baraja",
+                    parque_retiro: "Parque Retiro",
+                    cambiar_ubicacion: "Cambiar ubicación"
+                },
+
+                val: {
+                    muy_lento: "Molt llent",
+                    lento: "Llent",
+                    rapido: "Ràpid",
+                    muy_rapido: "Molt ràpid",
+                    ciudades: "Ciutats: ",
+                    madrid_centro: "Madrid Centre",
+                    aeropuerto_barajas: "Aeropuerto Baraja",
+                    parque_retiro: "Parc Retir",
+                    cambiar_ubicacion: "Cambiar ubicació"
+                },
+
+                en: {
+                    muy_lento: "Very slow",
+                    lento: "Slow",
+                    rapido: "Fast",
+                    muy_rapido: "Very fast",
+                    ciudades: "Cities: ",
+                    madrid_centro: "Center Madrid",
+                    aeropuerto_barajas: "Baraja's Airport",
+                    parque_retiro: "Retiro's Park",
+                    cambiar_ubicacion: "Change ubication"
+                }
+            };
+
+            // Actualiza los textos de acuerdo al idioma seleccionado
+            document.getElementById('muy_lento').innerText = translations[language].muy_lento;
+            document.getElementById('lento').innerText = translations[language].lento;
+            document.getElementById('rapido').innerText = translations[language].rapido;
+            document.getElementById('muy_rapido').innerText = translations[language].muy_rapido;
+            document.getElementById('madrid_centro').innerText = translations[language].madrid_centro;
+            document.getElementById('aeropuerto_barajas').innerText = translations[language].aeropuerto_barajas;
+            document.getElementById('parque_retiro').innerText = translations[language].parque_retiro;
+            document.getElementById('cambiar_ubicacion').innerText = translations[language].cambiar_ubicacion;
+        }
+
+        changeLanguage();
+    </script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=///API///&callback=initMap" async defer></script>
 </body>
 
 
 </html>
-
-
-
-
-
