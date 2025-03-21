@@ -191,109 +191,158 @@
 
             const trafficLayer = new google.maps.TrafficLayer();
             trafficLayer.setMap(map);
+            cargarDatos(0);
+            cargarDatos(1);
+            cargarDatos(2);
+            cargarDatos(3);
+            cargarDatos(4);
+            cargarDatos(5);
+            cargarDatos(6);
+            cargarDatos(7);
+            cargarDatos(8);
+            cargarDatos(9);
 
-            cargarDatos(); // <- Ahora carga los datos al inicializar el mapa
         }
-        function cargarDatos() {
-            /*
+        function cargarDatos(estado) {
             
-            
-                0, Fluido
-                1, Denso
-                2, Congestionado
-                3, Cortado
-                4, Sin datos
-                5, Paso inferior fluido
-                6, Paso inferior denso
-                7, Paso inferior congestionado
-                8, Paso inferior cortado
-                9, Sin datos (paso inferior) 
-            
-            */
-            fetch("http://localhost:8080/trafico/estado/3")
-                .then(response => response.json())
+            // 0: Fluido
+            // 1: Denso
+            // 2: Congestionado
+            // 3: Cortado
+            // 4: Sin datos
+            // 5: Paso inferior fluido
+            // 6: Paso inferior denso
+            // 7: Paso inferior congestionado
+            // 8: Paso inferior cortado
+            // 9: Sin datos (paso inferior)
+            // Definir los estados de tráfico y sus colores
+            const estadosTrafico = {
+                0: { estadoT: "Fluido", color: "#16E098" },         // Verde
+                1: { estadoT: "Denso", color: "#FFCF42" },          // Amarillo
+                2: { estadoT: "Congestionado", color: "#ED4D42" },  // Rojo claro
+                3: { estadoT: "Cortado", color: "#A92727" },        // Rojo oscuro
+                4: { estadoT: "Sin datos", color: "#808080" },      // Gris
+                5: { estadoT: "Paso inferior fluido", color: "#16E098" },
+                6: { estadoT: "Paso inferior denso", color: "#FFCF42" },
+                7: { estadoT: "Paso inferior congestionado", color: "#ED4D42" },
+                8: { estadoT: "Paso inferior cortado", color: "#A92727" },
+                9: { estadoT: "Sin datos (paso inferior)", color: "#808080" }
+            };
+           
+
+            fetch(`http://localhost:8080/trafico/estado/${estado}`)
+            .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Error en la respuesta de la API: " + response.status);
+                    }
+                    return response.json();
+                })
                 .then(data => {
-                    console.log("Datos recibidos:", data); // Verificar los datos en la consola
-                    data.forEach(punto => {
-                        if (punto.geo_point_2d) {
-                            let lat = punto.geo_point_2d.lat;
-                            let lon = punto.geo_point_2d.lon;
+                    console.log("Datos recibidos:", data);
+
+                    // Se asume que "data" es un array de registros
+                    data.forEach(record => {
+                        if (
+                            record.fields &&
+                            record.fields.geo_point_2d &&
+                            Array.isArray(record.fields.geo_point_2d) &&
+                            record.fields.geo_point_2d.length === 2
+                        ) {
+                            const [lat, lon] = record.fields.geo_point_2d;
                             console.log("Añadiendo marcador en:", lat, lon);
 
-                            new google.maps.Marker({
+                            // Crear el marcador
+                            const marker = new google.maps.Marker({
                                 position: { lat: lat, lng: lon },
-                                map: map,
-                                title: punto.denominacion,
+                                map: map, // Asegúrate de que "map" está inicializado
+                                title: record.fields.denominacion || "Sin nombre",
                                 icon: {
                                     path: google.maps.SymbolPath.CIRCLE,
                                     scale: 6,
-                                    fillColor: "red",
+                                    fillColor: estadosTrafico[estado].color,
                                     fillOpacity: 1,
                                     strokeWeight: 0
                                 }
                             });
+
+                            // Crear el contenido del InfoWindow con más datos
+                            const infoContent = `
+          <div>
+            <h3>${record.fields.denominacion || "Sin nombre"}</h3>
+            <p><strong>Estado:</strong> ${record.fields.estado}</p>
+            <p><strong>ID Tramo:</strong> ${record.fields.idtramo || "N/D"}</p>
+            <!-- Agrega más datos según necesites -->
+          </div>
+        `;
+
+                            const infoWindow = new google.maps.InfoWindow({
+                                content: infoContent
+                            });
+
+                            // Asocia el evento click para abrir el InfoWindow
+                            marker.addListener('click', () => {
+                                infoWindow.open(map, marker);
+                            });
                         } else {
-                            console.error("Punto sin coordenadas:", punto);
+                            console.error("No se encontraron coordenadas válidas en:", record);
                         }
                     });
                 })
                 .catch(error => console.error("Error cargando datos:", error));
-        }
+            }
+            function changeLanguage() {
+                const language = document.querySelector('.language-selector').value;
 
+                const translations = {
+                    es: {
+                        muy_lento: "Muy lento",
+                        lento: "Lento",
+                        rapido: "Rápido",
+                        muy_rapido: "Muy rápido",
+                        ciudades: "Ciudades: ",
+                        madrid_centro: "Madrid Centro",
+                        aeropuerto_barajas: "Aeropuerto Baraja",
+                        parque_retiro: "Parque Retiro",
+                        cambiar_ubicacion: "Cambiar ubicación"
+                    },
 
-        function changeLanguage() {
-            const language = document.querySelector('.language-selector').value;
+                    val: {
+                        muy_lento: "Molt llent",
+                        lento: "Llent",
+                        rapido: "Ràpid",
+                        muy_rapido: "Molt ràpid",
+                        ciudades: "Ciutats: ",
+                        madrid_centro: "Madrid Centre",
+                        aeropuerto_barajas: "Aeropuerto Baraja",
+                        parque_retiro: "Parc Retir",
+                        cambiar_ubicacion: "Cambiar ubicació"
+                    },
 
-            const translations = {
-                es: {
-                    muy_lento: "Muy lento",
-                    lento: "Lento",
-                    rapido: "Rápido",
-                    muy_rapido: "Muy rápido",
-                    ciudades: "Ciudades: ",
-                    madrid_centro: "Madrid Centro",
-                    aeropuerto_barajas: "Aeropuerto Baraja",
-                    parque_retiro: "Parque Retiro",
-                    cambiar_ubicacion: "Cambiar ubicación"
-                },
+                    en: {
+                        muy_lento: "Very slow",
+                        lento: "Slow",
+                        rapido: "Fast",
+                        muy_rapido: "Very fast",
+                        ciudades: "Cities: ",
+                        madrid_centro: "Center Madrid",
+                        aeropuerto_barajas: "Baraja's Airport",
+                        parque_retiro: "Retiro's Park",
+                        cambiar_ubicacion: "Change ubication"
+                    }
+                };
 
-                val: {
-                    muy_lento: "Molt llent",
-                    lento: "Llent",
-                    rapido: "Ràpid",
-                    muy_rapido: "Molt ràpid",
-                    ciudades: "Ciutats: ",
-                    madrid_centro: "Madrid Centre",
-                    aeropuerto_barajas: "Aeropuerto Baraja",
-                    parque_retiro: "Parc Retir",
-                    cambiar_ubicacion: "Cambiar ubicació"
-                },
+                // Actualiza los textos de acuerdo al idioma seleccionado
+                document.getElementById('muy_lento').innerText = translations[language].muy_lento;
+                document.getElementById('lento').innerText = translations[language].lento;
+                document.getElementById('rapido').innerText = translations[language].rapido;
+                document.getElementById('muy_rapido').innerText = translations[language].muy_rapido;
+                document.getElementById('madrid_centro').innerText = translations[language].madrid_centro;
+                document.getElementById('aeropuerto_barajas').innerText = translations[language].aeropuerto_barajas;
+                document.getElementById('parque_retiro').innerText = translations[language].parque_retiro;
+                document.getElementById('cambiar_ubicacion').innerText = translations[language].cambiar_ubicacion;
+            }
 
-                en: {
-                    muy_lento: "Very slow",
-                    lento: "Slow",
-                    rapido: "Fast",
-                    muy_rapido: "Very fast",
-                    ciudades: "Cities: ",
-                    madrid_centro: "Center Madrid",
-                    aeropuerto_barajas: "Baraja's Airport",
-                    parque_retiro: "Retiro's Park",
-                    cambiar_ubicacion: "Change ubication"
-                }
-            };
-
-            // Actualiza los textos de acuerdo al idioma seleccionado
-            document.getElementById('muy_lento').innerText = translations[language].muy_lento;
-            document.getElementById('lento').innerText = translations[language].lento;
-            document.getElementById('rapido').innerText = translations[language].rapido;
-            document.getElementById('muy_rapido').innerText = translations[language].muy_rapido;
-            document.getElementById('madrid_centro').innerText = translations[language].madrid_centro;
-            document.getElementById('aeropuerto_barajas').innerText = translations[language].aeropuerto_barajas;
-            document.getElementById('parque_retiro').innerText = translations[language].parque_retiro;
-            document.getElementById('cambiar_ubicacion').innerText = translations[language].cambiar_ubicacion;
-        }
-
-        changeLanguage();
+            changeLanguage();
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATHGvXCJNdfo1uEgJ4NZNt5Mi5Z8bfqXo&callback=initMap"
