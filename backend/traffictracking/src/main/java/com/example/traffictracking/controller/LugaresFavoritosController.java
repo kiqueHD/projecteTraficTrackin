@@ -3,11 +3,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import java.util.List;
 import com.example.traffictracking.model.LugaresFavoritos;
-import com.example.traffictracking.repository.LugaresFavoritosRepository;
 import com.example.traffictracking.service.LugaresFavoritosService;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/lugares-favoritos")
