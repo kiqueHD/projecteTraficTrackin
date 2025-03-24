@@ -1,114 +1,427 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="es">
 
 <head>
-   <title>TrafficTracking</title>
-   <style>
-       body {
-           margin: 0;
-           padding: 20px;
-           font-family: Arial, sans-serif;
-           display: flex;
-           justify-content: space-between;
-           background-color: #f0f0f0;
-       }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrafficTracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
 
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 0.5rem 0;
+            display: flex;
+            text-align: center;
+            justify-content: space-between;
+        }
 
-       .sidebar {
-           width: 30%;
-           padding: 20px;
-           background: #f4f4f4;
-           box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-           border-radius: 10px;
-       }
+        .enlaceRef {
+            display: inline-block;
 
+            color: black;
+            text-decoration: none;
+            transition: transform 0.3s ease-in-out;
 
-       .map-container {
-           width: 65%;
-           height: 600px;
-           border: 3px solid #3498db;
-           border-radius: 10px;
-           overflow: hidden;
-           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-       }
+        }
 
+        .enlaceRef:hover {
+            transform: translateY(-5px);
+        }
 
-       #map {
-           height: 100%;
-           width: 100%;
-       }
+        header h1 {
+            margin: 0px;
+        }
 
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin-right: 10px;
+        }
 
-       h1 {
-           color: #2c3e50;
-           text-align: center;
-           text-transform: uppercase;
-           letter-spacing: 2px;
-       }
-   </style>
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+       
+        main {
+            padding: 20px;
+        }
+
+        /*
+        .sidebar {
+            width: 30%;
+            padding: 20px;
+            background: #f4f4f4;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        */
+
+        section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            margin-top: 0;
+        }
+
+        .map-container {
+            width: 65%;
+            height: 600px;
+            border-radius: 10px;
+            overflow: inherit;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #map {
+
+            height: 100%;
+            width: 100%;
+            height: 500px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            width: 100%;
+            max-width: fit-content;
+            padding: 0.3em;
+            margin-top: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .parent {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            grid-column-gap: 0px;
+            grid-row-gap: 0px;
+        }
+
+        .div1 {
+            grid-area: 1 / 1 / 2 / 6;
+        }
+
+        .div2 {
+            grid-area: 2 / 1 / 3 / 4;
+        }
+
+        .div3 {
+            grid-area: 2 / 4 / 6 / 6;
+        }
+
+        .div4 {
+            grid-area: 3 / 1 / 6 / 4;
+        }
+    </style>
 </head>
 
 
 <body>
-   <div class="sidebar">
-       <h1>TrafficTracking</h1>
-       <h2>Búsquedas Más Frecuentes</h2>
-       <ul>
-           <li>Estado del tráfico en tiempo real</li>
-           <li>Accidentes recientes</li>
-           <li>Rutas alternativas</li>
-           <li>Zonas de congestión</li>
-       </ul>
-       <h2>Selecciona Ubicación</h2>
-       <select id="ciudades">
-           <option value="madrid" data-lat="40.416775" data-lng="-3.703790">Madrid Centro</option>
-           <option value="barajas" data-lat="40.472244" data-lng="-3.560891">Aeropuerto Barajas</option>
-           <option value="chamartin" data-lat="40.466443" data-lng="-3.684564">Chamartín</option>
-           <option value="retiro" data-lat="40.414572" data-lng="-3.681706">Parque Retiro</option>
-       </select>
-       <button onclick="cambiarUbicacion()">Cambiar ubicación</button>
-   </div>
-  
-   <div class="map-container">
-       <div id="map"></div>
-   </div>
+    <header>
+        <h1 style="display: flex; justify-content: flex-start; margin-left: 1em;">TrafficTracking</h1>
+        <nav class="idiomas">
+            <select id="languageSwitcher" margin-rigth="30px">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+                <option value="val">Valencià</option>
+            </select>
+
+        </nav>
+    </header>
+    <main>
+
+        <section id="leyenda" style="float:right;">
+            <section>
+                <a target="_blank" class="enlaceRef"
+                    href="https://developers.google.com/maps/documentation/javascript/examples/layer-traffic">Google
+                    Maps Traffic Layer (Google)</a>
+                <ul title="Leyenda traffiLayer Google Maps"></ul>
+                <li style="color: #A92727" data-translate="muy_lento">Muy lento</li>
+                <li style="color: #ED4D42" data-translate="lento">Lento</li>
+                <li style="color: #FFCF42" data-translate="rapido">Rápido</li>
+                <li style="color: #16E098" data-translate="muy_rapido">Muy rápido</li>
+                </ul>
+            </section>
+
+            <section>
+                <a target="_blank"class="enlaceRef"
+                    href="https://valencia.opendatasoft.com/explore/dataset/estat-transit-temps-real-estado-trafico-tiempo-real/api/?flg=es-es">
+                    Traffic Data Valencia (OpenDataSoft)</a>
+                
+                <ul title="Leyenda traffiLayer Google Maps">
+                    <li style="color: #A92727" data-translate="muy_lento">Muy lento</li>
+                    <li style="color: #ED4D42" data-translate="lento">Lento</li>
+                    <li style="color: #FFCF42" data-translate="rapido">Rápido</li>
+                    <li style="color: #16E098" data-translate="muy_rapido">Muy rápido</li>
+                </ul>
+            </section>
+            <section>
+                <a target="_blank" class="enlaceRef"
+                href="https://valencia.opendatasoft.com/explore/dataset/parkings/api/">
+                Parking Data Valencia (OpenDataSoft)</a>
+                <ul title="Leyenda traffiLayer Google Maps">
+                    <li style="color: #A92727" data-translate="muy_lento">Muy lento</li>
+                    <li style="color: #ED4D42" data-translate="lento">Lento</li>
+                    <li style="color: #FFCF42" data-translate="rapido">Rápido</li>
+                    <li style="color: #16E098" data-translate="muy_rapido">Muy rápido</li>
+                </ul>
+            </section>
+        </section>
+
+        <section style="display: flex; align-items: center; justify-content: flex-start; height: 2em; width: 65%;">
+            <h3 data-translate="ciudades" style="margin-right:2rem;">Ciudades:</h3>
+            <select name="ciudades">
+                <option value="madrid" data-lat="40.416775" data-lng="-3.703790" data-translate="madrid_centro">
+                    Madrid
+                    Centro</option>
+                <option value="barajas" data-lat="40.472244" data-lng="-3.560891" data-translate="aeropuerto_barajas">
+                    Aeropuerto Barajas</option>
+                <option value="chamartin" data-lat="40.466443" data-lng="-3.684564">Chamartín</option>
+                <option value="retiro" data-lat="40.414572" data-lng="-3.681706" data-translate="parque_retiro">
+                    Parque
+                    Retiro</option>
+            </select>
+            <button onclick="cambiarUbicacion()" data-translate="cambiar_ubicacion">Cambiar
+                ubicación</button>
+            <!-- Aqui hay que hacer que el usuario al poner el raton encima le salga un texto de 
+                 "el lugar favorito seleccionado sera al que te lleve la pagina al cargar" 
+                 y que cuando lo cambie se recargue automaticamente-->
+            <select onfocus="asdkfjalsk" name="Lugares favoritos" id="">
+                <option value="Lugar 1">Lugar 1</option>
+                <option value="Lugar 2">Lugar 2</option>
+                <option value="Lugar 3">Lugar 3</option>
+
+            </select>
+
+            <button onclick="" data-translate="add_favs">Añade a favoritos</button>
+        </section>
+
+        <section style="height: 500px; width: 65%;">
+            <div id="map"></div>
+        </section>
+    </main>
+
+    <script>
+        let map;
+        function cambiarUbicacion() {
+            const select = document.getElementById('ciudades');
+            const opcionSeleccionada = select.options[select.selectedIndex];
+            const nuevaLat = parseFloat(opcionSeleccionada.dataset.lat);
+            const nuevaLng = parseFloat(opcionSeleccionada.dataset.lng);
 
 
-   <script>
-       let map;
-       function cambiarUbicacion() {
-           const select = document.getElementById('ciudades');
-           const opcionSeleccionada = select.options[select.selectedIndex];
-           const nuevaLat = parseFloat(opcionSeleccionada.dataset.lat);
-           const nuevaLng = parseFloat(opcionSeleccionada.dataset.lng);
-
-
-           map.panTo({ lat: nuevaLat, lng: nuevaLng });
-           map.setZoom(14);
-       }
-       function initMap() {
+            map.panTo({ lat: nuevaLat, lng: nuevaLng });
+            map.setZoom(14);
+        }
+        function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
-               zoom: 6,
-               center: { lat: 40.416775, lng: -3.703790 },
-               mapTypeControl: false,
-               streetViewControl: false
-           });
+                zoom: 12,
+                center: { lat: 39.4699, lng: -0.3763 } // Valencia
+            });
+
+            const trafficLayer = new google.maps.TrafficLayer();
+            trafficLayer.setMap(map);
+            cargarDatos(0);
+            cargarDatos(1);
+            cargarDatos(2);
+            cargarDatos(3);
+            cargarDatos(4);
+            cargarDatos(5);
+            cargarDatos(6);
+            cargarDatos(7);
+            cargarDatos(8);
+            cargarDatos(9);
+
+        }
+        function cargarDatos(estado) {
+
+            // 0: Fluido
+            // 1: Denso
+            // 2: Congestionado
+            // 3: Cortado
+            // 4: Sin datos
+            // 5: Paso inferior fluido
+            // 6: Paso inferior denso
+            // 7: Paso inferior congestionado
+            // 8: Paso inferior cortado
+            // 9: Sin datos (paso inferior)
+            // Definir los estados de tráfico y sus colores
+            const COLORES = {
+                FLUIDO: "#16E098",            // Verde
+                DENSO: "#FFCF42",             // Amarillo
+                CONGESTIONADO: "#ED4D42",     // Rojo claro
+                CORTADO: "#A92727",           // Rojo oscuro
+                SIN_DATOS: "#808080",         // Gris
+                PASO_FLUIDO: "#14B884",       // Verde más oscuro
+                PASO_DENSO: "#E6B800",        // Amarillo más fuerte
+                PASO_CONGESTIONADO: "#D6453D", // Rojo intermedio
+                PASO_CORTADO: "#7A1E1E",      // Rojo muy oscuro
+                PASO_SIN_DATOS: "#6B6B6B"     // Gris más oscuro
+            };
+            const estadosTrafico = {
+                0: { estadoT: "Fluido", color: "#16E098" },         // Verde
+                1: { estadoT: "Denso", color: "#FFCF42" },          // Amarillo
+                2: { estadoT: "Congestionado", color: "#ED4D42" },  // Rojo claro
+                3: { estadoT: "Cortado", color: "#A92727" },        // Rojo oscuro
+                4: { estadoT: "Sin datos", color: "#808080" },      // Gris
+                5: { estadoT: "Paso inferior fluido", color: "#16E098" },
+                6: { estadoT: "Paso inferior denso", color: "#FFCF42" },
+                7: { estadoT: "Paso inferior congestionado", color: "#ED4D42" },
+                8: { estadoT: "Paso inferior cortado", color: "#A92727" },
+                9: { estadoT: "Sin datos (paso inferior)", color: "#808080" }
+            };
 
 
-           const trafficLayer = new google.maps.TrafficLayer();
-           trafficLayer.setMap(map);
-       }
-   </script>
+            fetch(`http://localhost:8080/trafico/estado/${estado}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Error en la respuesta de la API: " + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Datos recibidos:", data);
 
+                    // Se asume que "data" es un array de registros
+                    data.forEach(record => {
+                        if (
+                            record.fields &&
+                            record.fields.geo_point_2d &&
+                            Array.isArray(record.fields.geo_point_2d) &&
+                            record.fields.geo_point_2d.length === 2
+                        ) {
+                            const [lat, lon] = record.fields.geo_point_2d;
+                            console.log("Añadiendo marcador en:", lat, lon);
 
-   <script src="https://maps.googleapis.com/maps/api/js?key=aquiVaLaClavedeAPI&callback=initMap" async defer></script>
+                            // Crear el marcador
+                            const marker = new google.maps.Marker({
+                                position: { lat: lat, lng: lon },
+                                map: map, // Asegúrate de que "map" está inicializado
+                                title: record.fields.denominacion || "Sin nombre",
+                                icon: {
+                                    path: google.maps.SymbolPath.CIRCLE,
+                                    scale: 6,
+                                    fillColor: estadosTrafico[estado].color,
+                                    fillOpacity: 1,
+                                    strokeWeight: 0
+                                }
+                            });
+
+                            // Crear el contenido del InfoWindow con más datos
+                            const infoContent = `
+          <div>
+            <h3>${record.fields.denominacion || "Sin nombre"}</h3>
+            <p><strong>Estado:</strong> ${record.fields.estado}</p>
+            <p><strong>ID Tramo:</strong> ${record.fields.idtramo || "N/D"}</p>
+            <!-- Agrega más datos según necesites -->
+          </div>
+        `;
+
+                            const infoWindow = new google.maps.InfoWindow({
+                                content: infoContent
+                            });
+
+                            // Asocia el evento click para abrir el InfoWindow
+                            marker.addListener('click', () => {
+                                infoWindow.open(map, marker);
+                            });
+                        } else {
+                            console.error("No se encontraron coordenadas válidas en:", record);
+                        }
+                    });
+                })
+                .catch(error => console.error("Error cargando datos:", error));
+        }
+        function changeLanguage() {
+            const language = document.querySelector('.language-selector').value;
+
+            const translations = {
+                es: {
+                    muy_lento: "Muy lento",
+                    lento: "Lento",
+                    rapido: "Rápido",
+                    muy_rapido: "Muy rápido",
+                    ciudades: "Ciudades: ",
+                    madrid_centro: "Madrid Centro",
+                    aeropuerto_barajas: "Aeropuerto Baraja",
+                    parque_retiro: "Parque Retiro",
+                    cambiar_ubicacion: "Cambiar ubicación"
+                },
+
+                val: {
+                    muy_lento: "Molt llent",
+                    lento: "Llent",
+                    rapido: "Ràpid",
+                    muy_rapido: "Molt ràpid",
+                    ciudades: "Ciutats: ",
+                    madrid_centro: "Madrid Centre",
+                    aeropuerto_barajas: "Aeropuerto Baraja",
+                    parque_retiro: "Parc Retir",
+                    cambiar_ubicacion: "Cambiar ubicació"
+                },
+
+                en: {
+                    muy_lento: "Very slow",
+                    lento: "Slow",
+                    rapido: "Fast",
+                    muy_rapido: "Very fast",
+                    ciudades: "Cities: ",
+                    madrid_centro: "Center Madrid",
+                    aeropuerto_barajas: "Baraja's Airport",
+                    parque_retiro: "Retiro's Park",
+                    cambiar_ubicacion: "Change ubication"
+                }
+            };
+
+            // Actualiza los textos de acuerdo al idioma seleccionado
+            document.getElementById('muy_lento').innerText = translations[language].muy_lento;
+            document.getElementById('lento').innerText = translations[language].lento;
+            document.getElementById('rapido').innerText = translations[language].rapido;
+            document.getElementById('muy_rapido').innerText = translations[language].muy_rapido;
+            document.getElementById('madrid_centro').innerText = translations[language].madrid_centro;
+            document.getElementById('aeropuerto_barajas').innerText = translations[language].aeropuerto_barajas;
+            document.getElementById('parque_retiro').innerText = translations[language].parque_retiro;
+            document.getElementById('cambiar_ubicacion').innerText = translations[language].cambiar_ubicacion;
+        }
+
+        changeLanguage();
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATHGvXCJNdfo1uEgJ4NZNt5Mi5Z8bfqXo&callback=initMap"
+        async defer></script>
 </body>
 
 
 </html>
-
-
-
-
-
