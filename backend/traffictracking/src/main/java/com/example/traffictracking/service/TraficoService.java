@@ -20,9 +20,7 @@ public class TraficoService {
          * https://valencia.opendatasoft.com/api/explore/v2.1/catalog/datasets/estat-transit-temps-real-estado-trafico-tiempo-real/records?limit=20&where=estado=1
          */
         
-        String url = "https://valencia.opendatasoft.com/api/records/1.0/search/"
-                   + "?dataset=estat-transit-temps-real-estado-trafico-tiempo-real"
-                   + "&limit=100";
+        String url = "https://valencia.opendatasoft.com/api/records/1.0/search/?dataset=estat-transit-temps-real-estado-trafico-tiempo-real&limit=100";
                    //+ "&where=estado=" + estado;
                    
   

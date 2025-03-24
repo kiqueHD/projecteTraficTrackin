@@ -51,3 +51,13 @@ https://valencia.aws-ec2-eu-central-1.opendatasoft.com/api/explore/v2.1/catalog/
 
 
 ejemplo https://iavis.uv.es/wp-content/uploads/2023/07/InformeCuadroMandosMovilidadValencia.pdf
+
+
+
+----------------------------------------------------------------------------------------------------------
+Recursos usados
+Opendatasoft sobre valencia
+-Parkings
+https://valencia.opendatasoft.com/explore/dataset/parkings/api/
+-Trafico
+https://valencia.opendatasoft.com/explore/dataset/estat-transit-temps-real-estado-trafico-tiempo-real/api/?flg=es-es
