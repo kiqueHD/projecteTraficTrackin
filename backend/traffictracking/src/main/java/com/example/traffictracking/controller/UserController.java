@@ -25,6 +25,11 @@ public class UserController {
     // Agregar un nuevo usuario
     @PostMapping
     public User addUser(@RequestBody User user) {
+        // Verificar si ya existe un usuario con el mismo email
+        Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+        if (existingUser.isPresent()) {
+            throw new RuntimeException("Ya existe un usuario con este email");
+        }
         return userRepository.save(user);
     }
 
