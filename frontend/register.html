@@ -30,6 +30,8 @@
     <script>
         function changeLanguage() {
             const language = document.querySelector('.language-selector').value;
+            localStorage.setItem('language', language); // Guardar el idioma en localStorage
+
     
             const translations = {
                 es: {
@@ -70,6 +72,12 @@
             document.getElementById('submit-register').value = translations[language].submitText;
             document.querySelector('.link p').innerHTML = translations[language].loginPage;
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const storedLanguage = localStorage.getItem('language') || 'es'; // Si no hay idioma guardado, usa 'es' por defecto
+            document.querySelector('.language-selector').value = storedLanguage; // Selecciona el idioma guardado
+            changeLanguage(); // Aplica el idioma al cargar la página
+        });
     </script>
 </body>
 </html>

@@ -14,103 +14,154 @@
 </head>
 
 <body>
+    <!-- Selector de idioma -->
+    <select class="language-selector" onchange="changeLanguage()">
+        <option value="es">Castellano</option>
+        <option value="val">Valencià</option>
+        <option value="en">English</option>
+    </select>
+
     <div class="container-form sign-up">
         <div class="welcome-back">
             <div class="message">
-                <h2>Bienvenido a Traffick</h2>
-                <p>Si ya tienes una cuenta por favor inicia sesion aqui</p>
-                <button class="sign-up-btn">Iniciar Sesion</button>
+                <h2 id="welcome-title">Bienvenido a Traffick</h2>
+                <p id="welcome-message">Si ya tienes una cuenta por favor inicia sesión aqui</p>
+                <button class="sign-up-btn" id="sign-up-btn">Iniciar Sesión</button>
             </div>
         </div>
         <form class="formulario">
-            <h2 class="create-account">Crear una cuenta</h2>
+            <h2 class="create-account" id="create-account">Crear una cuenta</h2>
             <div class="iconos">
                 <div class="border-icon">
                     <i class='bx bxl-instagram'></i>
                 </div>
                 <div class="border-icon">
-                    <i class='bx bxl-linkedin' ></i>
+                    <i class='bx bxl-linkedin'></i>
                 </div>
                 <div class="border-icon">
-                    <i class='bx bxl-facebook-circle' ></i>
+                    <i class='bx bxl-facebook-circle'></i>
                 </div>
             </div>
-            <p class="cuenta-gratis">Crear una cuenta gratis</p>
-            <input type="text" placeholder="Nombre">
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Contraseña">
-            <input type="button" value="Registrarse">
+            <p class="cuenta-gratis" id="free-account">Crear una cuenta gratis</p>
+            <input type="text" placeholder="Nombre" id="username">
+            <input type="email" placeholder="Email" id="email">
+            <input type="password" placeholder="Contraseña" id="password">
+            <input type="button" value="Registrarse" id="submit">
         </form>
     </div>
+
     <div class="container-form sign-in">
         <form class="formulario">
-            <h2 class="create-account">Iniciar Sesion</h2>
+            <h2 class="create-account" id="sign-in-title">Iniciar Sesión</h2>
             <div class="iconos">
                 <div class="border-icon">
                     <i class='bx bxl-instagram'></i>
                 </div>
                 <div class="border-icon">
-                    <i class='bx bxl-linkedin' ></i>
+                    <i class='bx bxl-linkedin'></i>
                 </div>
                 <div class="border-icon">
-                    <i class='bx bxl-facebook-circle' ></i>
+                    <i class='bx bxl-facebook-circle'></i>
                 </div>
             </div>
-            <p class="cuenta-gratis">¿Aun no tienes una cuenta?</p>
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Contraseña">
-            <input type="button" value="Iniciar Sesion">
+            <p class="cuenta-gratis" id="sign-in-message">¿Aún no tienes una cuenta?</p>
+            <input type="email" placeholder="Email" id="sign-in-email">
+            <input type="password" placeholder="Contraseña" id="sign-in-password">
+            <input type="button" value="Iniciar Sesión" id="sign-in-btn">
         </form>
         <div class="welcome-back">
             <div class="message">
-                <h2>Bienvenido de nuevo</h2>
-                <p>Si aun no tienes una cuenta por favor registrese aqui</p>
-                <button class="sign-in-btn">Registrarse</button>
+                <h2 id="sign-in-welcome">Bienvenido de nuevo</h2>
+                <p id="sign-in-register">Si aún no tienes una cuenta, por favor regístrate aquí</p>
+                <button class="sign-in-btn" id="sign-in-action-btn">Registrarse</button>
             </div>
         </div>
     </div>
-    <script src="js/LoginRegscript.js"></script>
 
-   <!-- Selector de idioma -->
-   <select class="language-selector" onchange="changeLanguage()">
-    <option value="es">Castellano</option>
-    <option value="val">Valenciano</option>
-    <option value="en">English</option>
-</select>
     <script>
+        // Función para cambiar el idioma
         function changeLanguage() {
             const language = document.querySelector('.language-selector').value;
 
             const translations = {
                 es: {
-                    title: 'Iniciar sesión',
-                    usernamePlaceholder: 'Usuario',
+                    welcomeTitle: 'Bienvenido a Traffick',
+                    welcomeMessage: 'Si ya tienes una cuenta por favor inicia sesión aquí',
+                    signUpBtnText: 'Iniciar Sesión',
+                    createAccount: 'Crear una cuenta',
+                    freeAccount: 'Crear una cuenta gratis',
+                    usernamePlaceholder: 'Nombre',
+                    emailPlaceholder: 'Email',
                     passwordPlaceholder: 'Contraseña',
-                    submitText: 'Ingresar',
-                    forgotPasswordText: '¿Olvidaste tu contraseña?'
+                    submitText: 'Registrarse',
+                    signInTitle: 'Iniciar Sesión',
+                    signInMessage: '¿Aún no tienes una cuenta?',
+                    signInEmailPlaceholder: 'Email',
+                    signInPasswordPlaceholder: 'Contraseña',
+                    signInBtnText: 'Iniciar Sesión',
+                    signInWelcome: 'Bienvenido de nuevo',
+                    signInRegister: 'Si aún no tienes una cuenta, por favor regístrate aquí',
+                    signInActionBtnText: 'Registrarse'
                 },
                 val: {
-                    title: 'Iniciar sessió',
-                    usernamePlaceholder: 'Usuari',
+                    welcomeTitle: 'Benvingut a Traffick',
+                    welcomeMessage: 'Si ja tens un compte, si us plau inicia sessió aquí',
+                    signUpBtnText: 'Iniciar Sessió',
+                    createAccount: 'Crear un compte',
+                    freeAccount: 'Crear un compte gratuït',
+                    usernamePlaceholder: 'Nom',
+                    emailPlaceholder: 'Email',
                     passwordPlaceholder: 'Contrasenya',
-                    submitText: 'Entrar',
-                    forgotPasswordText: 'Has oblidat la teua contrasenya?'
+                    submitText: 'Registrar-se',
+                    signInTitle: 'Iniciar Sessió',
+                    signInMessage: 'Encara no tens un compte?',
+                    signInEmailPlaceholder: 'Correu electrònic',
+                    signInPasswordPlaceholder: 'Contrasenya',
+                    signInBtnText: 'Iniciar Sessió',
+                    signInWelcome: 'Benvingut de nou',
+                    signInRegister: 'Si encara no tens un compte, si us plau registra’t aquí',
+                    signInActionBtnText: 'Registrar-se'
                 },
                 en: {
-                    title: 'Login',
-                    usernamePlaceholder: 'Username',
+                    welcomeTitle: 'Welcome to Traffick',
+                    welcomeMessage: 'If you already have an account, please log in here',
+                    signUpBtnText: 'Log In',
+                    createAccount: 'Create an account',
+                    freeAccount: 'Create a free account',
+                    usernamePlaceholder: 'Name',
+                    emailPlaceholder: 'Email',
                     passwordPlaceholder: 'Password',
-                    submitText: 'Login',
-                    forgotPasswordText: 'Forgot your password?'
+                    submitText: 'Register',
+                    signInTitle: 'Log In',
+                    signInMessage: 'Don’t have an account yet?',
+                    signInEmailPlaceholder: 'Email',
+                    signInPasswordPlaceholder: 'Password',
+                    signInBtnText: 'Log In',
+                    signInWelcome: 'Welcome back',
+                    signInRegister: 'If you don’t have an account yet, please register here',
+                    signInActionBtnText: 'Register'
                 }
             };
 
             // Actualizar los textos de acuerdo al idioma seleccionado
-            document.getElementById('title').innerText = translations[language].title;
+            document.getElementById('welcome-title').innerText = translations[language].welcomeTitle;
+            document.getElementById('welcome-message').innerText = translations[language].welcomeMessage;
+            document.getElementById('sign-up-btn').innerText = translations[language].signUpBtnText;
+            document.getElementById('create-account').innerText = translations[language].createAccount;
+            document.getElementById('free-account').innerText = translations[language].freeAccount;
             document.getElementById('username').placeholder = translations[language].usernamePlaceholder;
+            document.getElementById('email').placeholder = translations[language].emailPlaceholder;
             document.getElementById('password').placeholder = translations[language].passwordPlaceholder;
             document.getElementById('submit').value = translations[language].submitText;
-            document.getElementById('forgot-link').innerText = translations[language].forgotPasswordText;
+
+            document.getElementById('sign-in-title').innerText = translations[language].signInTitle;
+            document.getElementById('sign-in-message').innerText = translations[language].signInMessage;
+            document.getElementById('sign-in-email').placeholder = translations[language].signInEmailPlaceholder;
+            document.getElementById('sign-in-password').placeholder = translations[language].signInPasswordPlaceholder;
+            document.getElementById('sign-in-btn').value = translations[language].signInBtnText;
+            document.getElementById('sign-in-welcome').innerText = translations[language].signInWelcome;
+            document.getElementById('sign-in-register').innerText = translations[language].signInRegister;
+            document.getElementById('sign-in-action-btn').innerText = translations[language].signInActionBtnText;
         }
     </script>
 </body>
