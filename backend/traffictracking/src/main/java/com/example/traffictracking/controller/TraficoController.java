@@ -16,8 +16,4 @@ public class TraficoController {
         this.service = service;
     }
 
-    @GetMapping("/estado/{estado}")
-    public ResponseEntity<List<Map<String, Object>>> obtenerPorEstado(@PathVariable int estado) {
-        return ResponseEntity.ok(service.obtenerTraficoPorEstado(estado));
-    }
 }

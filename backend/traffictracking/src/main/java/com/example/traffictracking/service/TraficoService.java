@@ -1,50 +1,83 @@
 package com.example.traffictracking.service;
 
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class TraficoService {
 
-    private final RestTemplate restTemplate;
+    private final RestTemplate restTemplate = new RestTemplate();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public TraficoService() {
-        this.restTemplate = new RestTemplate();
-    }
+    public JsonNode obtenerYTransformarJson() {
+        try {
+            // Llamar a la API externa
+            String urlApiTrafico = "https://valencia.opendatasoft.com/api/explore/v2.1/catalog/datasets/trafico/records?limit=100";
+            String jsonTrafico = restTemplate.getForObject(urlApiTrafico, String.class);
 
-    public List<Map<String, Object>> obtenerTraficoPorEstado(int estado) {
-        // Construimos la URL con el filtro "where"
-        /**
-         * https://valencia.opendatasoft.com/api/explore/v2.1/catalog/datasets/estat-transit-temps-real-estado-trafico-tiempo-real/records?limit=20&where=estado=1
-         */
-        
-        String url = "https://valencia.opendatasoft.com/api/records/1.0/search/?dataset=estat-transit-temps-real-estado-trafico-tiempo-real&limit=100";
-                   //+ "&where=estado=" + estado;
-                   
-  
-        // Realiza la petición
-        Map<String, Object> respuesta = restTemplate.getForObject(url, Map.class);
+            // Convertir respuesta a JsonNode
+            JsonNode nodoRaiz = objectMapper.readTree(jsonTrafico);
+            ArrayNode resultados = (ArrayNode) nodoRaiz.get("results");
+            ArrayNode jsonSimplificado = objectMapper.createArrayNode();
 
-        // Imprime lo que responde la API
-        System.out.println("Respuesta API: " + respuesta);
+            // Iterar y filtrar los datos
+            for (JsonNode nodo : resultados) {
+                ObjectNode record = objectMapper.createObjectNode();
+                record.put("denominacion", nodo.get("denominacion").asText());
+                record.put("estado", nodo.get("estado").asInt());
 
-        if (respuesta == null || !respuesta.containsKey("records")) {
-            System.out.println("Error: La respuesta es nula o no tiene 'records'");
-            return List.of();
+                // Obtener coordenadas de geo_point_2d o geo_shape.geometry.coordinates
+                JsonNode geoPoint = nodo.get("geo_point_2d");
+                if (geoPoint != null) {
+                    record.put("lat", geoPoint.get("lat").asDouble());
+                    record.put("lon", geoPoint.get("lon").asDouble());
+                } else {
+                    JsonNode geoShape = nodo.get("geo_shape");
+                    if (geoShape != null && geoShape.has("geometry") && geoShape.get("geometry").has("coordinates")) {
+                        JsonNode coordinates = geoShape.get("geometry").get("coordinates");
+                        if (coordinates.isArray() && coordinates.size() > 0) {
+                            JsonNode firstPoint = coordinates.get(0);
+                            if (firstPoint.isArray() && firstPoint.size() >= 2) {
+                                record.put("lon", firstPoint.get(0).asDouble());
+                                record.put("lat", firstPoint.get(1).asDouble());
+                            }
+                        }
+                    }
+                }
+
+                jsonSimplificado.add(record);
+            }
+            return jsonSimplificado;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null; // Manejo de errores básico
         }
-
-        Object records = respuesta.get("records");
-
-        if (!(records instanceof List)) {
-            System.out.println(" Error: 'records' no es una lista");
-            return List.of();
-        }
-
-        List<Map<String, Object>> datos = (List<Map<String, Object>>) records;
-
-        System.out.println("✅ Lugares con estado " + estado + ": " + datos.size());
-        return datos;
     }
 }
+/**
+ * 
+  {
+    "results": [
+        {
+            "denominacion": "CONSTITUCIÓN (DE HERMANOS MACHADO A TAVERNES BLANQUES)",
+            "estado": 0,
+            "lat": 39.499551709139574,
+            "lon": -0.3700778715218118
+        },
+        {
+            "denominacion": "abastos",
+            "estado": 0,
+            "lat": 39.1234,
+            "lon": -3.0987
+        }
+    ]
+  }
+
+
+ */
