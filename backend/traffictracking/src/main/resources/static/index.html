@@ -22,7 +22,18 @@
             padding: 0.5rem 0;
             display: flex;
             text-align: center;
-            justify-content: space-between;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 15px;
+            height: 35px;
         }
 
         .enlaceRef {
@@ -40,35 +51,10 @@
 
         header h1 {
             margin: 0px;
-            display: flex;
-            justify-content: flex-start;
-            margin-left: 1em;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin-right: 10px;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-       
-        main {
-            padding: 20px;
+            margin-left: 10px;
         }
 
         section {
-            margin-bottom: 20px;
-            padding: 15px;
             background: #fff;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -87,7 +73,6 @@
         }
 
         #map {
-
             height: 100%;
             width: 100%;
             height: 500px;
@@ -118,19 +103,10 @@
         .parent {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: repeat(5, 1fr);
-            grid-column-gap: 0px;
-            grid-row-gap: 0px;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: repeat(5, 1fr);
+            grid-template-rows: repeat(1, 1fr);
             grid-column-gap: 10px;
-            grid-row-gap: 10px;
-            width: 100%;
-            height: 100%;
+            grid-row-gap: 15px;
+            padding: 15px;
         }
 
         .grid-item {
@@ -146,6 +122,10 @@
 
         .div1 {
             grid-area: 1 / 1 / 1 / 6;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-evenly;
+            align-items: baseline;
         }
 
         .div2 {
@@ -156,96 +136,93 @@
         .div3 {
             grid-area: 2 / 5 / 6 / 6;
             display: flex;
-            align-content: center;
+            flex-direction: column;
         }
     </style>
 </head>
 
-
 <body>
     <header>
+        <!---->
         <h1>TrafficTracking</h1>
-        <nav class="idiomas">
-            <select id="languageSwitcher" margin-rigth="30px">
-                <option value="es">Español</option>
-                <option value="en">English</option>
-                <option value="val">Valencià</option>
-            </select>
-
-        </nav>
+        <select class="language-selector">
+            <option value="es">Español</option>
+            <option value="en">English</option>
+            <option value="val">Valencià</option>
+        </select>
     </header>
-    <main class="grid-container">
-
-        <section class="grid.item div3">
+    <div class="parent">
+        <section class="grid-item div3">
             <div>
                 <a target="_blank" class="enlaceRef"
                     href="https://developers.google.com/maps/documentation/javascript/examples/layer-traffic">Google
                     Maps Traffic Layer (Google)</a>
                 <ul title="Leyenda traffiLayer Google Maps"></ul>
-                <li style="color: #A92727" data-translate="muy_lento">Muy lento</li>
-                <li style="color: #ED4D42" data-translate="lento">Lento</li>
-                <li style="color: #FFCF42" data-translate="rapido">Rápido</li>
-                <li style="color: #16E098" data-translate="muy_rapido">Muy rápido</li>
-                </ul>
-            </dic>
-
-            <div>
-                <a target="_blank"class="enlaceRef"
-                    href="https://valencia.opendatasoft.com/explore/dataset/estat-transit-temps-real-estado-trafico-tiempo-real/api/?flg=es-es">
-                    Traffic Data Valencia (OpenDataSoft)</a>
-                
-                <ul title="Leyenda traffiLayer Google Maps">
-                    <li style="color: #A92727" data-translate="muy_lento">Muy lento</li>
-                    <li style="color: #ED4D42" data-translate="lento">Lento</li>
-                    <li style="color: #FFCF42" data-translate="rapido">Rápido</li>
-                    <li style="color: #16E098" data-translate="muy_rapido">Muy rápido</li>
+                <li style="color: #A92727" data-key="muy_lento">Muy lento</li>
+                <li style="color: #ED4D42" data-key="lento">Lento</li>
+                <li style="color: #FFCF42" data-key="rapido">Rápido</li>
+                <li style="color: #16E098" data-key="muy_rapido">Muy rápido</li>
                 </ul>
             </div>
+
             <div>
                 <a target="_blank" class="enlaceRef"
-                href="https://valencia.opendatasoft.com/explore/dataset/parkings/api/">
-                Parking Data Valencia (OpenDataSoft)</a>
+                    href="https://valencia.opendatasoft.com/explore/dataset/estat-transit-temps-real-estado-trafico-tiempo-real/api/?flg=es-es">
+                    Traffic Data Valencia (OpenDataSoft)</a>
+
                 <ul title="Leyenda traffiLayer Google Maps">
-                    <li style="color: #A92727" data-translate="muy_lento">Muy lento</li>
-                    <li style="color: #ED4D42" data-translate="lento">Lento</li>
-                    <li style="color: #FFCF42" data-translate="rapido">Rápido</li>
-                    <li style="color: #16E098" data-translate="muy_rapido">Muy rápido</li>
+                    <li style="color: #A92727" data-key="muy_lento">Muy lento</li>
+                    <li style="color: #ED4D42" data-key="lento">Lento</li>
+                    <li style="color: #FFCF42" data-key="rapido">Rápido</li>
+                    <li style="color: #16E098" data-key="muy_rapido">Muy rápido</li>
+                </ul>
+            </div>
+
+            <div>
+                <a target="_blank" class="enlaceRef"
+                    href="https://valencia.opendatasoft.com/explore/dataset/parkings/api/">
+                    Parking Data Valencia (OpenDataSoft)</a>
+                <ul title="Leyenda traffiLayer Google Maps">
+                    <li style="color: #A92727" data-key="muy_lento">Muy lento</li>
+                    <li style="color: #ED4D42" data-key="lento">Lento</li>
+                    <li style="color: #FFCF42" data-key="rapido">Rápido</li>
+                    <li style="color: #16E098" data-key="muy_rapido">Muy rápido</li>
                 </ul>
             </div>
         </section>
 
         <section class="grid-item div1">
-            <h3 data-translate="ciudades" style="margin-right:2rem;">Ciudades:</h3>
-            <select name="ciudades">
-                <option value="madrid" data-lat="40.416775" data-lng="-3.703790" data-translate="madrid_centro">
-                    Madrid
-                    Centro</option>
-                <option value="barajas" data-lat="40.472244" data-lng="-3.560891" data-translate="aeropuerto_barajas">
-                    Aeropuerto Barajas</option>
-                <option value="chamartin" data-lat="40.466443" data-lng="-3.684564">Chamartín</option>
-                <option value="retiro" data-lat="40.414572" data-lng="-3.681706" data-translate="parque_retiro">
-                    Parque
-                    Retiro</option>
-            </select>
-            <button onclick="cambiarUbicacion()" data-translate="cambiar_ubicacion">Cambiar
-                ubicación</button>
+            <div>
+                <select name="ciudades">
+                    <option value="madrid" data-lat="40.416775" data-lng="-3.703790" data-key="madrid_centro">
+                        Madrid Centro</option>
+                    <option value="barajas" data-lat="40.472244" data-lng="-3.560891"
+                        data-key="aeropuerto_barajas">Aeropuerto Barajas</option>
+                    <option value="chamartin" data-lat="40.466443" data-lng="-3.684564">Chamartín</option>
+                    <option value="retiro" data-lat="40.414572" data-lng="-3.681706" data-key="parque_retiro">
+                        Parque Retiro</option>
+                </select>
+
+                <button onclick="cambiarUbicacion()" data-key="cambiar_ubicacion">Cambiar ubicación</button>
+            </div>
             <!-- Aqui hay que hacer que el usuario al poner el raton encima le salga un texto de 
                  "el lugar favorito seleccionado sera al que te lleve la pagina al cargar" 
                  y que cuando lo cambie se recargue automaticamente-->
-            <select onfocus="asdkfjalsk" name="Lugares favoritos" id="">
-                <option value="Lugar 1">Lugar 1</option>
-                <option value="Lugar 2">Lugar 2</option>
-                <option value="Lugar 3">Lugar 3</option>
+            <div>
+                <select onfocus="asdkfjalsk" name="Lugares favoritos" id="">
+                    <option value="Lugar 1">Lugar 1</option>
+                    <option value="Lugar 2">Lugar 2</option>
+                    <option value="Lugar 3">Lugar 3</option>
+                </select>
 
-            </select>
-
-            <button onclick="" data-translate="add_favs">Añade a favoritos</button>
+                <button onclick="" data-key="add_favs">Añade a favoritos</button>
+            </div>
         </section>
 
         <section class="grid.item div2">
             <div id="map"></div>
         </section>
-    </main>
+    </div>
 
     <script>
         let map;
@@ -378,63 +355,68 @@
                 })
                 .catch(error => console.error("Error cargando datos:", error));
         }
-        function changeLanguage() {
-            const language = document.querySelector('.language-selector').value;
 
-            const translations = {
-                es: {
-                    muy_lento: "Muy lento",
-                    lento: "Lento",
-                    rapido: "Rápido",
-                    muy_rapido: "Muy rápido",
-                    ciudades: "Ciudades: ",
-                    madrid_centro: "Madrid Centro",
-                    aeropuerto_barajas: "Aeropuerto Baraja",
-                    parque_retiro: "Parque Retiro",
-                    cambiar_ubicacion: "Cambiar ubicación"
-                },
+        const translations = {
+            es: {
+                muy_lento: "Muy lento",
+                lento: "Lento",
+                rapido: "Rápido",
+                muy_rapido: "Muy rápido",
+                ciudades: "Ciudades: ",
+                madrid_centro: "Madrid Centro",
+                aeropuerto_barajas: "Aeropuerto Baraja",
+                parque_retiro: "Parque Retiro",
+                cambiar_ubicacion: "Cambiar ubicación",
+                add_favs: "Añadir a favoritos"
+            },
 
-                val: {
-                    muy_lento: "Molt llent",
-                    lento: "Llent",
-                    rapido: "Ràpid",
-                    muy_rapido: "Molt ràpid",
-                    ciudades: "Ciutats: ",
-                    madrid_centro: "Madrid Centre",
-                    aeropuerto_barajas: "Aeropuerto Baraja",
-                    parque_retiro: "Parc Retir",
-                    cambiar_ubicacion: "Cambiar ubicació"
-                },
+            val: {
+                muy_lento: "Molt llent",
+                lento: "Llent",
+                rapido: "Ràpid",
+                muy_rapido: "Molt ràpid",
+                ciudades: "Ciutats: ",
+                madrid_centro: "Madrid Centre",
+                aeropuerto_barajas: "Aeropuerto Baraja",
+                parque_retiro: "Parc Retir",
+                cambiar_ubicacion: "Cambiar ubicació",
+                add_favs: "Incloure en favorits"
+            },
 
-                en: {
-                    muy_lento: "Very slow",
-                    lento: "Slow",
-                    rapido: "Fast",
-                    muy_rapido: "Very fast",
-                    ciudades: "Cities: ",
-                    madrid_centro: "Center Madrid",
-                    aeropuerto_barajas: "Baraja's Airport",
-                    parque_retiro: "Retiro's Park",
-                    cambiar_ubicacion: "Change ubication"
-                }
-            };
+            en: {
+                muy_lento: "Very slow",
+                lento: "Slow",
+                rapido: "Fast",
+                muy_rapido: "Very fast",
+                ciudades: "Cities: ",
+                madrid_centro: "Center Madrid",
+                aeropuerto_barajas: "Baraja's Airport",
+                parque_retiro: "Retiro's Park",
+                cambiar_ubicacion: "Change ubication",
+                add_favs: "Add to favourites"
+            }
+        };
 
-            // Actualiza los textos de acuerdo al idioma seleccionado
-            document.getElementById('muy_lento').innerText = translations[language].muy_lento;
-            document.getElementById('lento').innerText = translations[language].lento;
-            document.getElementById('rapido').innerText = translations[language].rapido;
-            document.getElementById('muy_rapido').innerText = translations[language].muy_rapido;
-            document.getElementById('madrid_centro').innerText = translations[language].madrid_centro;
-            document.getElementById('aeropuerto_barajas').innerText = translations[language].aeropuerto_barajas;
-            document.getElementById('parque_retiro').innerText = translations[language].parque_retiro;
-            document.getElementById('cambiar_ubicacion').innerText = translations[language].cambiar_ubicacion;
+        document.addEventListener("DOMContentLoaded", () => {
+            const languageSwitcher = document.getElementById("language-selector");
+            let lang = localStorage.getItem("lang") || "es";
+            languageSwitcher.value = lang;
+            applyTranslations(lang);
+
+            languageSwitcher.addEventListener("change", (event) => {
+                lang = event.target.value;
+                localStorage.setItem("lang", lang);
+                applyTranslations(lang);
+            });
+        });
+
+        function applyTranslations(lang) {
+            document.querySelectorAll("[data-key]").forEach(el => {
+                el.innerText = translations[lang][el.getAttribute("data-key")];
+            });
         }
-
-        changeLanguage();
     </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATHGvXCJNdfo1uEgJ4NZNt5Mi5Z8bfqXo&callback=initMap"
-        async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATHGvXCJNdfo1uEgJ4NZNt5Mi5Z8bfqXo&callback=initMap" async defer></script>
 </body>
 
 
