@@ -1,6 +1,5 @@
 package com.example.traffictracking.service;
 
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class TraficoService {
+public class TrafficService {
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -17,7 +16,7 @@ public class TraficoService {
     public JsonNode obtenerYTransformarJson() {
         try {
             // Llamar a la API externa
-            String urlApiTrafico = "https://valencia.opendatasoft.com/api/explore/v2.1/catalog/datasets/trafico/records?limit=100";
+            String urlApiTrafico = "https://valencia.aws-ec2-eu-central-1.opendatasoft.com/api/explore/v2.1/catalog/datasets/estat-transit-temps-real-estado-trafico-tiempo-real/records?limit=100";
             String jsonTrafico = restTemplate.getForObject(urlApiTrafico, String.class);
 
             // Convertir respuesta a JsonNode
@@ -52,7 +51,12 @@ public class TraficoService {
 
                 jsonSimplificado.add(record);
             }
-            return jsonSimplificado;
+
+            // Crear la estructura final con un campo "results"
+            ObjectNode resultadoFinal = objectMapper.createObjectNode();
+            resultadoFinal.set("results", jsonSimplificado);
+
+            return resultadoFinal;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,6 +64,7 @@ public class TraficoService {
         }
     }
 }
+
 /**
  * 
   {
