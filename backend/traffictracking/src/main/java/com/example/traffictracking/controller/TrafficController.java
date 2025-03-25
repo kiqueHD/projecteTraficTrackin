@@ -18,6 +18,6 @@ public class TrafficController {
 
     @GetMapping
     public JsonNode obtenerDatosTrafico() {
-        return trafficService.obtenerYTransformarJson();
+        return trafficService.obtenerYTransformarJsonTrafico();
     }
 }

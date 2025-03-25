@@ -13,7 +13,7 @@ public class TrafficService {
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public JsonNode obtenerYTransformarJson() {
+    public JsonNode obtenerYTransformarJsonTrafico() {
         try {
             // Llamar a la API externa
             String urlApiTrafico = "https://valencia.aws-ec2-eu-central-1.opendatasoft.com/api/explore/v2.1/catalog/datasets/estat-transit-temps-real-estado-trafico-tiempo-real/records?limit=100";
