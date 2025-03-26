@@ -61,3 +61,21 @@ Opendatasoft sobre valencia
 https://valencia.opendatasoft.com/explore/dataset/parkings/api/
 -Trafico
 https://valencia.opendatasoft.com/explore/dataset/estat-transit-temps-real-estado-trafico-tiempo-real/api/?flg=es-es
+
+
+
+marcadores 
+
+🟡:
+
+URL: http://maps.google.com/mapfiles/ms/icons/yellow-dot.png
+
+🔴:
+
+URL: http://maps.google.com/mapfiles/ms/icons/red-dot.png
+
+🟠:
+
+URL: http://maps.google.com/mapfiles/ms/icons/orange-dot.
+
+url: https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png     Ícono de parking
