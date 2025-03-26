@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/traficoTiempoReal")
+@RequestMapping("/traffic")
 public class TrafficController {
 
     private final TrafficService trafficService;
@@ -16,7 +16,7 @@ public class TrafficController {
         this.trafficService = trafficService;
     }
 
-    @GetMapping
+    @GetMapping("/datos")
     public JsonNode obtenerDatosTrafico() {
         return trafficService.obtenerYTransformarJsonTrafico();
     }

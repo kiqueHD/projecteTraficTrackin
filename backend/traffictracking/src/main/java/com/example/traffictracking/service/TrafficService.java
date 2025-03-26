@@ -64,9 +64,30 @@ public class TrafficService {
         }
     }
 }
+/**
+ * 
+ *  COLORES
+                * --0 FLUIDO,
+                * 1 DENSO,                  // Amarillo
+                * 2 CONGESTIONADO,          // NARANJA
+                * 3 CORTADO,                // Rojo
+                * --4 SIN_DATOS,
+                * --5 PASO_FLUIDO,
+                * 6 PASO_DENSO:,            // Amarillo
+                * 7 PASO_CONGESTIONADO,     // narnaja
+                * 8 PASO_CORTADO,           // Rojo
+                * --9 PASO_SIN_DATOS
+ * 
+ */
 
 /**
  * 
+ * 1-6 amarillo
+ * 2-7 naranja
+ * 3-8 rojo
+ */
+/**
+ *  
   {
     "results": [
         {

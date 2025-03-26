@@ -8,7 +8,7 @@ public class HomeController {
 //creo que se puede devovler sin el .html
     @GetMapping("/")
     public String home() {
-        return "MainPrueba.html"; 
+        return "index.html"; 
     }
     @GetMapping("/admin")
     public String admin() {

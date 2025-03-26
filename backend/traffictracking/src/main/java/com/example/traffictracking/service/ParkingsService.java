@@ -9,14 +9,14 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ParkingsService {
-    
+
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public JsonNode transformarJsonParkings() {
         try {
             // Llamar a la API externa
-            String urlApiParkings = "https://valencia.opendatasoft.com/api/explore/v2.1/catalog/datasets/parkings/records?limit=100"; 
+            String urlApiParkings = "https://valencia.opendatasoft.com/api/explore/v2.1/catalog/datasets/parkings/records?limit=100";
             String jsonParkings = restTemplate.getForObject(urlApiParkings, String.class);
 
             // Convertir respuesta a JsonNode
@@ -34,7 +34,7 @@ public class ParkingsService {
                     record.put("plazasTotales", nodo.get("plazastota").asInt());
                     record.put("plazasLibres", plazasLibres);
                     record.put("fechaModificacion", nodo.get("ultima_mod").asText());
-                    
+
                     // Obtener coordenadas de geo_point_2d
                     JsonNode geoPoint = nodo.get("geo_point_2d");
                     if (geoPoint != null) {
@@ -61,27 +61,28 @@ public class ParkingsService {
 /**
  * 
  * {
-    "results": [
-        {
-            "nombre": "Parking Centro",
-            "direccion": "Calle Mayor, 10",
-            "plazasTotales": 200,
-            "plazasLibres": 50,
-            "fechaModificacion": "2024-03-25T10:00:00Z",
-            "lat": 39.4699,
-            "lon": -0.3763
-        },
-        {
-            "nombre": "Parking Norte",
-            "direccion": "Avenida Valencia, 5",
-            "plazasTotales": 150,
-            "plazasLibres": 20,
-            "fechaModificacion": "2024-03-25T09:45:00Z",
-            "lat": 39.4800,
-            "lon": -0.3850
-        }
-    ]
-}
-
+ * "results": [
+ * {
+ * "nombre": "Parking Centro",
+ * "direccion": "Calle Mayor, 10",
+ * "plazasTotales": 200,
+ * "plazasLibres": 50,
+ * "fechaModificacion": "2024-03-25T10:00:00Z",
+ * "lat": 39.4699,
+ * "lon": -0.3763,
+ * "color":
+ * },
+ * {
+ * "nombre": "Parking Norte",
+ * "direccion": "Avenida Valencia, 5",
+ * "plazasTotales": 150,
+ * "plazasLibres": 20,
+ * "fechaModificacion": "2024-03-25T09:45:00Z",
+ * "lat": 39.4800,
+ * "lon": -0.3850
+ * }
+ * ]
+ * }
+ * 
  * 
  */

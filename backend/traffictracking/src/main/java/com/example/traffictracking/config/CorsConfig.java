@@ -1,5 +1,5 @@
 
-/** 
+
 package com.example.traffictracking.config;
 
 
@@ -16,11 +16,10 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*") // Permitir cualquier origen
+                        .allowedOrigins("http://localhost:8080") // Permitir solicitudes desde localhost:8080
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
             }
         };
     }
 }
-*/
