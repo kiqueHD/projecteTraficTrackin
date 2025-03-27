@@ -16,8 +16,6 @@ public class AuthControllerTest {
     @Autowired
     private AuthController authController;
 
-    @Autowired
-    private UserRepository userRepository;
 
     @Test
     public void testRegisterUser() {

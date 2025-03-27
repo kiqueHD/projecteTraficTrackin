@@ -32,7 +32,15 @@ public class UserController {
         }
         return userRepository.save(user);
     }
-
+    // Endpoint para login
+    @PostMapping("/login")
+    public User login(@RequestBody User loginUser) {
+        Optional<User> user = userRepository.findByEmail(loginUser.getEmail());
+        if (user.isPresent() && user.get().getPassword().equals(loginUser.getPassword())) {
+            return user.get();
+        }
+        throw new RuntimeException("Credenciales inválidas");
+    }
     // Eliminar usuario por ID
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable Long id) {
