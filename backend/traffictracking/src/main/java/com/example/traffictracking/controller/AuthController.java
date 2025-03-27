@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -36,21 +38,17 @@ public ResponseEntity<?> registerUser(@RequestBody User user) {
 
 
     // Login de un usuario
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User loginUser) {
-        // Buscar al usuario por correo electrónico
-        Optional<User> user = userRepository.findByEmail(loginUser.getEmail());
+ @PostMapping("/login")
+public ResponseEntity<Map<String, String>> login(@RequestBody User loginUser) {
+    Optional<User> user = userRepository.findByEmail(loginUser.getEmail());
 
-        if (user.isPresent()) {
-            // Comprobar si la contraseña es correcta (sin encriptación)
-            if (loginUser.getPassword().equals(user.get().getPassword())) {
-                // Si el login es exitoso, puedes generar un token o simplemente devolver un mensaje
-                return ResponseEntity.ok("Login exitoso.");
-            } else {
-                return ResponseEntity.badRequest().body("Contraseña incorrecta.");
-            }
-        }
+    if (user.isPresent() && loginUser.getPassword().equals(user.get().getPassword())) {
+        Map<String, String> response = new HashMap<>();
+        response.put("redirect", "/"); // Redirigir a index.html
+        return ResponseEntity.ok(response);
+    } 
 
-        return ResponseEntity.badRequest().body("Usuario no encontrado.");
-    }
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "Usuario o contraseña incorrectos"));
+}
+
 }

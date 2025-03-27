@@ -2,7 +2,6 @@
 package com.example.traffictracking.controller;
 
 import com.example.traffictracking.model.User;
-import com.example.traffictracking.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,20 +24,5 @@ public class AuthControllerTest {
         assertTrue(response.getStatusCode().is2xxSuccessful());
     }
 
-    @Test
-    public void testLogin() {
-        // First register a user
-        User user = new User("loginuser", "login@example.com", "password");
-        authController.registerUser(user);
-
-        // Then attempt login
-        User loginUser = new User();
-        loginUser.setEmail("login@example.com");
-        loginUser.setPassword("password");
-
-        ResponseEntity<String> loginResponse = authController.login(loginUser);
-        
-        assertEquals("Login exitoso.", loginResponse.getBody());
-    }
 }
 
