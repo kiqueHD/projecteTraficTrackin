@@ -9,3 +9,4 @@ document.addEventListener('click', e => {
         $signUp.classList.toggle('active')
     }
 });
+//este script da un problema un poco raro cuado se enlaza mediante script src="" asi que lo he puesto en el html provisionalmente
