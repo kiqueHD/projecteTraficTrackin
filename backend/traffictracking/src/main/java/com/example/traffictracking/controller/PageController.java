@@ -14,9 +14,10 @@ public class PageController {
     public String admin() {
         return "admin.html"; 
     }
-    @GetMapping("/LoginRegister")
-    public String login() {
+    @GetMapping("/LoginReg")
+    public String loginReg() {
         return "LoginReg.html"; 
     }
+   
    
 }

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/lugares-favoritos")
+@RequestMapping("/lugares-favoritos")
 public class LugaresFavoritosController {
     
     private final LugaresFavoritosRepository repository;
@@ -20,7 +20,7 @@ public class LugaresFavoritosController {
         this.repository = repository;
         this.userRepository = userRepository;
     }
-
+    
     // Obtener todos los lugares favoritos de un usuario por su id
     @GetMapping("/usuario/{userId}")
     public ResponseEntity<List<LugaresFavoritos>> getLugaresFavoritosByUserId(@PathVariable Long userId) {
