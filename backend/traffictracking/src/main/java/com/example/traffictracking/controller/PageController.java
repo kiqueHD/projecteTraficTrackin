@@ -4,8 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
-//creo que se puede devovler sin el .html
+public class PageController {
+// Controlador para las rutas de la aplicación
     @GetMapping("/")
     public String home() {
         return "index.html"; 
@@ -14,13 +14,9 @@ public class HomeController {
     public String admin() {
         return "admin.html"; 
     }
-    @GetMapping("/login")
+    @GetMapping("/loginRegister")
     public String login() {
-        return "login.html"; 
+        return "LoginReg.html"; 
     }
-    @GetMapping("/register")
-    public String register() {
-        return "register.html"; 
-    }
-    
+   
 }
