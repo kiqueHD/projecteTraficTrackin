@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
+// ESTE CONTROLLER SE HIZO Y USO AL PRINCIPIO PARA TESTEAR, ES AuthController el que se ocupa de los usuarios
 @CrossOrigin(origins = "http://localhost:8080") // Permitir peticiones desde el frontend
 @RestController
 @RequestMapping("/users")
