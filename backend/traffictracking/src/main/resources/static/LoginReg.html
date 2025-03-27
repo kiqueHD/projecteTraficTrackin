@@ -28,11 +28,11 @@
         <form class="formulario">
             <h2 class="create-account" data-key="createAccountTitle">Crear una cuenta</h2>
             <p class="cuenta-gratis" data-key="freeAccount">Crear una cuenta gratis</p>
-            <input type="text" placeholder="Nombre" data-key="namePlaceholder">
-            <input type="email" placeholder="Email" data-key="emailPlaceholder">
-            <input type="password" placeholder="Contraseña" data-key="passwordPlaceholder">
+            <input type="text" placeholder="Nombre" data-key="namePlaceholder" required>
+            <input type="email" placeholder="Email" data-key="emailPlaceholder" required>
+            <input type="password" placeholder="Contraseña" data-key="passwordPlaceholder" required>
             <!--ESTO DE ABAJO TIENE QUE SER UN BUTTON TYPE SUBMIT-->
-            <input type="button" value="Registrarse" data-key="registerButton">
+            <button type="submit" data-key="registerButton">Resgistrarse</button>
         </form>
     </div>
 
@@ -40,10 +40,10 @@
         <form class="formulario">
             <h2 class="create-account" data-key="loginTitle">Iniciar Sesión</h2>
             <p class="cuenta-gratis" data-key="registerPrompt">¿Aun no tienes una cuenta?</p>
-            <input type="email" placeholder="Email" data-key="emailPlaceholder">
-            <input type="password" placeholder="Contraseña" data-key="passwordPlaceholder">
+            <input type="email" placeholder="Email" data-key="emailPlaceholder" required>
+            <input type="password" placeholder="Contraseña" data-key="passwordPlaceholder" required>
                         <!--ESTO DE ABAJO TIENE QUE SER UN BUTTON TYPE SUBMIT-->
-            <input type="button" value="Iniciar Sesion" data-key="loginButton">
+            <button type="submit" data-key="loginButton"><i class="fa-regular fa-envelope"></i>Iniciar sesión</button> 
         </form>
         <div class="welcome-back">
             <div class="message">
