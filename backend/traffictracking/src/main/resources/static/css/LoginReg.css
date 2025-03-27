@@ -94,7 +94,7 @@ body {
     color: white;
 }
 
-.formulario input[type="button"] {
+.formulario button[type="submit"] {
     width: 60%;
     margin: auto;
     border: solid thin white;
