@@ -152,6 +152,8 @@ button:hover {
 
 .tooltip-text {
     visibility: hidden;
+    font-size: 12px;
+    width: auto;
     background-color: black;
     color: white;
     text-align: center;
