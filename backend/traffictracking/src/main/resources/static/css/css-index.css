@@ -24,6 +24,7 @@ header {
 }
 
 .language-selector {
+    background-color: white;
     position: absolute;
     top: 15px;
     right: 20px;
@@ -34,7 +35,16 @@ header {
     font-size: 15px;
     height: 35px;
 }
+select{
+    background-color: rgb(104, 209, 228);
+    border: none;
+    border-radius: 5px;
+    padding:  5px;
+    cursor: pointer;
+    font-size: 15px;
+    height: 35px;
 
+}
 .enlaceRef {
     display: inline-block;
 

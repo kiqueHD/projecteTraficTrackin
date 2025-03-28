@@ -36,6 +36,8 @@ function windowFav(){
 
         infoWindowFav.open(map);
     });
+    
+
 }
 
 }
