@@ -38,17 +38,17 @@ public ResponseEntity<?> registerUser(@RequestBody User user) {
 
 
     // Login de un usuario
- @PostMapping("/login")
-public ResponseEntity<Map<String, String>> login(@RequestBody User loginUser) {
-    Optional<User> user = userRepository.findByEmail(loginUser.getEmail());
-
-    if (user.isPresent() && loginUser.getPassword().equals(user.get().getPassword())) {
-        Map<String, String> response = new HashMap<>();
-        response.put("redirect", "/"); // Redirigir a index.html
-        return ResponseEntity.ok(response);
-    } 
-
-    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "Usuario o contraseña incorrectos"));
-}
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, String>> login(@RequestBody User loginUser) {
+        Optional<User> user = userRepository.findByEmail(loginUser.getEmail());
+    
+        if (user.isPresent() && loginUser.getPassword().equals(user.get().getPassword())) {
+            Map<String, String> response = new HashMap<>();
+            response.put("redirect", "/?userId=" + user.get().getId()); // Pasar id por URL
+            return ResponseEntity.ok(response);
+        } 
+    
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "Usuario o contraseña incorrectos"));
+    }
 
 }
