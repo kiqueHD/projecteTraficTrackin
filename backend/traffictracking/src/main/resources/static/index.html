@@ -23,20 +23,20 @@
     <div class="parent">
         <section class="grid-item div3">
             <div>
-                <!---
-                molaria redireccionar aqui a esta pagina para que el usuario pueda ver la leyenda de los colores
-                -https://support.google.com/maps/answer/3092439?hl=es&co=GENIE.Platform%3DDesktop#zippy=%2Ctr%C3%A1fico-->
+                <!-- Enlace a la leyenda de colores de Google Maps -->
                 <a target="_blank" class="enlaceRef"
-                    href="https://developers.google.com/maps/documentation/javascript/examples/layer-traffic">Google
-                    Maps Traffic Layer (Google)</a>
-                <ul title="Leyenda traffiLayer Google Maps"></ul>
-                <li style="color: #A92727" data-key="muy_lento">Muy lento</li>
-                <li style="color: #ED4D42" data-key="lento">Lento</li>
-                <li style="color: #FFCF42" data-key="rapido">Rápido</li>
-                <li style="color: #16E098" data-key="muy_rapido">Muy rápido</li>
+                    href="https://support.google.com/maps/answer/3092439?hl=es&co=GENIE.Platform%3DDesktop#zippy=%2Ctr%C3%A1fico">
+                    Ver leyenda de colores en Google Maps
+                </a>
+            
+                <ul title="Leyenda traffiLayer Google Maps">
+                    <li style="color: #A92727" data-key="muy_lento">Muy lento</li>
+                    <li style="color: #ED4D42" data-key="lento">Lento</li>
+                    <li style="color: #FFCF42" data-key="rapido">Rápido</li>
+                    <li style="color: #16E098" data-key="muy_rapido">Muy rápido</li>
                 </ul>
             </div>
-
+            
             <div>
                 <a target="_blank" class="enlaceRef"
                     href="https://valencia.opendatasoft.com/explore/dataset/estat-transit-temps-real-estado-trafico-tiempo-real/api/?flg=es-es">
@@ -80,15 +80,21 @@
             <!-- Aqui hay que hacer que el usuario al poner el raton encima le salga un texto de 
                  "el lugar favorito seleccionado sera al que te lleve la pagina al cargar" 
                  y que cuando lo cambie se recargue automaticamente-->
-            <div>
-                <select onfocus="asdkfjalsk" name="Lugares favoritos" id="">
-                    <option value="Lugar 1">Lugar 1</option>
-                    <option value="Lugar 2">Lugar 2</option>
-                    <option value="Lugar 3">Lugar 3</option>
-                </select>
-
-                <button onclick="" data-key="add_favs">Añade a favoritos</button>
-            </div>
+                 <div>
+                    <select name="Lugares favoritos" id="favoritos" onchange="recargarPagina()">
+                        <option value="Lugar 1">Lugar 1</option>
+                        <option value="Lugar 2">Lugar 2</option>
+                        <option value="Lugar 3">Lugar 3</option>
+                    </select>
+                
+                    <div style="position: relative; display: inline-block;">
+                        <button id="btnFavoritos" data-key="add_favs">
+                            Añade a favoritos
+                        </button>
+                        <span id="tooltip" class="tooltip-text">El lugar favorito seleccionado será al que te lleve la página al cargar</span>
+                    </div>
+                </div>
+                
         </section>
 
         <section class="grid.item div2">

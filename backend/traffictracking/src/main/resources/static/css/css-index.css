@@ -148,3 +148,25 @@ button:hover {
     .div2{grid-area: 2 / span 6; height: 500px;}
     .div3{grid-area: 3 / span 6;}
 }
+
+
+.tooltip-text {
+    visibility: hidden;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#btnFavoritos:hover + .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
