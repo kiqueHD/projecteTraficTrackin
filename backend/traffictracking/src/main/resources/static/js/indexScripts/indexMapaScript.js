@@ -36,7 +36,13 @@ function windowFav(){
 
         infoWindowFav.open(map);
     });
-    
+    //algo asi ha de ser lugar favorito
+    lugarFavorito = {
+        usuario: "Usuario",
+        nombre: "Lugar Favorito",
+        latitud: lat,
+        longitud: lng
+    };
 
 }
 
