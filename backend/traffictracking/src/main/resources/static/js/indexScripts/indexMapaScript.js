@@ -1,4 +1,6 @@
 let map;
+let infoWindowFav = null; // Variable global para almacenar la InfoWindowFAv activa
+lugarFavorito = null; // Variable para almacenar el lugarFavorito favorito
 
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
@@ -9,26 +11,34 @@ function initMap() {
     const trafficLayer = new google.maps.TrafficLayer();
     trafficLayer.setMap(map);
     createMarcadores();
+    windowFav();
 
-
+   
+function windowFav(){
+  
     map.addListener("rightclick", (e) => {
         // Obtiene las coordenadas del punto donde se hizo clic derecho
         const latLng = e.latLng;
         const lat = latLng.lat();
         const lng = latLng.lng();
+         // Cierra la InfoWindow actual si existe
+      if (infoWindowFav) {
+        infoWindowFav.close();
+        lugarFavorito = null; // Reinicia el lugarFavorito favorito
+    }
 
-        // Muestra las coordenadas en la consola
-        console.log(`Coordenadas del clic derecho: Latitud: ${lat}, Longitud: ${lng}`);
-
-        // Opcional: Muestra las coordenadas en una ventana de información
-        const infoWindow = new google.maps.InfoWindow({
+        // Muestra las coordenadas en una ventana de información
+         infoWindowFav = new google.maps.InfoWindow({
             position: latLng,
             content: `Latitud: ${lat}<br>Longitud: ${lng}`,
         });
-        infoWindow.open(map);
+        console.log("WINDOWFAV ACTUAL\nLatitud: " + lat + ", Longitud: " + lng);
+
+        infoWindowFav.open(map);
     });
 }
 
+}
 
 function createMarcadores() {
     /**

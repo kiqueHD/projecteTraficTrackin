@@ -44,6 +44,8 @@ const translations = {
 document.addEventListener("DOMContentLoaded", () => {
     const languageSwitcher = document.getElementById("language-selector");
     let lang = localStorage.getItem("lang") || "es";
+    // ERROR indexTranslation.js:47 Uncaught TypeError: Cannot set properties of null (setting 'value')
+    //at HTMLDocument.<anonymous> (indexTranslation.js:47:28)
     languageSwitcher.value = lang;
     applyTranslations(lang);
 
