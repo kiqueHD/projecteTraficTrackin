@@ -167,7 +167,7 @@ button:hover {
 }
 
 
-.tooltip-text {
+.tooltip-textLugaresFavBtn {
     visibility: hidden;
     font-size: 12px;
     width: auto;
@@ -185,7 +185,7 @@ button:hover {
     transition: opacity 0.3s;
 }
 
-#btnFavoritos:hover + .tooltip-text {
+#btnFavoritos:hover + .tooltip-textLugaresFavBtn {
     visibility: visible;
     opacity: 1;
 }

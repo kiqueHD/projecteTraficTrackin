@@ -28,7 +28,7 @@
                     href="https://support.google.com/maps/answer/3092439?hl=es&co=GENIE.Platform%3DDesktop#zippy=%2Ctr%C3%A1fico">
                     Ver leyenda de colores en Google Maps
                 </a>
-            
+
                 <ul title="Leyenda traffiLayer Google Maps">
                     <li style="color: #A92727" data-key="muy_lento">Muy lento</li>
                     <li style="color: #ED4D42" data-key="lento">Lento</li>
@@ -36,7 +36,7 @@
                     <li style="color: #16E098" data-key="muy_rapido">Muy rápido</li>
                 </ul>
             </div>
-            
+
             <div>
                 <a target="_blank" class="enlaceRef"
                     href="https://valencia.opendatasoft.com/explore/dataset/estat-transit-temps-real-estado-trafico-tiempo-real/api/?flg=es-es">
@@ -77,36 +77,38 @@
 
                 <button onclick="cambiarUbicacion()" data-key="cambiar_ubicacion">Cambiar ubicación</button>
             </div>
-            <!-- Aqui hay que hacer que el usuario al poner el raton encima le salga un texto de 
-                 "el lugar favorito seleccionado sera al que te lleve la pagina al cargar" 
-                 y que cuando lo cambie se recargue automaticamente-->
-                 <div>
-                    <select name="Lugares favoritos" id="favoritos" onchange="recargarPagina()">
-                        <option value="Lugar 1">Lugar 1</option>
-                        <option value="Lugar 2">Lugar 2</option>
-                        <option value="Lugar 3">Lugar 3</option>
-                    </select>
-                
-                    <div style="position: relative; display: inline-block;">
-                        <button id="btnFavoritos" data-key="add_favs">
-                            Añade a favoritos
-                        </button>
-                        <span id="tooltip" class="tooltip-text">El lugar favorito seleccionado será al que te lleve la página al cargar</span>
-                        <input type="text" id="inputLugarFavorito" placeholder="Escribe algo...">
+           
+            <div>
+                <select name="Lugares favoritos" id="favoritos" onchange="cambiarUbicacion()">
+                    <option value="Lugar 1">Lugar 1</option>
+                    <option value="Lugar 2">Lugar 2</option>
+                    <option value="Lugar 3">Lugar 3</option>
+                </select>
 
-                    </div>
+                <div style="position: relative; display: inline-block;">
+                    <form id="addFav">
+                    <input type="text" id="nombreLugarFav"title="Escribe el nombre de tu lugar favorito" placeholder="Escribe el nombre del lugar" required>
+                    <button type="submit" id="btnFavoritos" data-key="add_favs">
+                        Añade a favoritos
+                    </button>
+                    <span id="tooltip" class="tooltip-textLugaresFavBtn">Selecciona un lugar en el mapa
+                        (click drecho) y escribe un nombre para él. <br>Será agregado a tus lugares favoritos y al seleccionarlo se enfocará en el mapa.</span>
+                    </form>
+
                 </div>
-                
+            </div>
+
         </section>
 
         <section class="grid.item div2">
             <div id="map"></div>
         </section>
     </div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATHGvXCJNdfo1uEgJ4NZNt5Mi5Z8bfqXo&callback=initMap"async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATHGvXCJNdfo1uEgJ4NZNt5Mi5Z8bfqXo&callback=initMap"
+        async defer></script>
     <script src="js/indexScripts/indexMapaScript.js"></script>
     <script src="js/indexScripts/indexTranslation.js"></script>
-
+    <script src="js/indexScripts/indexLugaresFav.js"></script>
 </body>
 
 
