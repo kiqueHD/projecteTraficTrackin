@@ -1,7 +1,7 @@
-let map;
-let infoWindowFav = null; // Variable global para almacenar la InfoWindowFAv activa
-lugarFavorito = null; // Variable para almacenar el lugarFavorito favorito
-
+//variables globales
+map;
+infoWindowFav = null; // Variable global para almacenar la InfoWindowFAv activa
+uno="holaaaa";
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 12,
@@ -10,41 +10,39 @@ function initMap() {
 
     const trafficLayer = new google.maps.TrafficLayer();
     trafficLayer.setMap(map);
+   
     createMarcadores();
     windowFav();
-
-   
+}
 function windowFav(){
   
     map.addListener("rightclick", (e) => {
         // Obtiene las coordenadas del punto donde se hizo clic derecho
         const latLng = e.latLng;
-        const lat = latLng.lat();
-        const lng = latLng.lng();
-         // Cierra la InfoWindow actual si existe
+         lat = latLng.lat();
+         lng = latLng.lng();
+         // Cierra la InfoWindow actual si existe para evitar múltiples ventanas abiertas
       if (infoWindowFav) {
         infoWindowFav.close();
-        lugarFavorito = null; // Reinicia el lugarFavorito favorito
     }
 
         // Muestra las coordenadas en una ventana de información
          infoWindowFav = new google.maps.InfoWindow({
             position: latLng,
-            content: `Latitud: ${lat}<br>Longitud: ${lng}`,
+            content: `<h4>Lugar seleccionado</h4>Latitud: ${lat}<br>Longitud: ${lng}`,
+        });
+        infoWindowFav.addListener("closeclick", () => {
+            console.log("La ventana de información ha sido cerrada.");
         });
         console.log("WINDOWFAV ACTUAL\nLatitud: " + lat + ", Longitud: " + lng);
 
         infoWindowFav.open(map);
+        
+        // Agrega un listener para detectar cuando se cierra la InfoWindow
+        
     });
     //algo asi ha de ser lugar favorito
-    lugarFavorito = {
-        usuario: "Usuario",
-        nombre: "Lugar Favorito",
-        latitud: lat,
-        longitud: lng
-    };
-
-}
+    
 
 }
 
