@@ -6,14 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TrafficTracking</title>
     <link rel="stylesheet" href="css/css-index.css" />
-    <link rel="icon" type="image/png" href="imagenes/favicon/faviconTrafficTracking.ico">
+    <link rel="icon" type="image/png" href="imagenes/logo-prueba_blanco.png" type="image/png"
+        media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" href="imagenes/logo-prueba_negro.png" type="image/png"
+        media="(prefers-color-scheme: light)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        .collapsible-panel {
+            border-bottom: 1px solid lightgray;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .collapsible-panel_content {
+            display: flex;
+            flex-direction: column;
+            height: fit-content;
+            transition: height 1s;
+        }
+
+        /* .collapsible-panel .collapsible-panel_content  */
+        #collapsible-content-leyenda {
+            display: none;
+        }
+
+        .is-collapse {
+            height: 0px;
+            transition: height 1s;
+        }
+    </style>
 </head>
 
 <body>
     <header>
         <!-- logo -->
-        <h1>TrafficTracking <i class="fa-solid fa-traffic-light"></i></h1>
+        <h1>TrafficTracking</h1>
+        <img alt="logo" src="imagenes/logo-prueba_blanco.png" height="50px" style="margin-left: 1em;" />
         <select class="language-selector">
             <option value="es">Español</option>
             <option value="en">English</option>
@@ -22,21 +51,43 @@
     </header>
     <div class="parent">
         <section class="grid-item div3">
-            <div>
-                <!-- Enlace a la leyenda de colores de Google Maps -->
-                <a target="_blank" class="enlaceRef"
-                    href="https://support.google.com/maps/answer/3092439?hl=es&co=GENIE.Platform%3DDesktop#zippy=%2Ctr%C3%A1fico">
+            <!-- Enlace a la leyenda de colores de Google Maps: https://support.google.com/maps/answer/3092439?hl=es&co=GENIE.Platform%3DDesktop#zippy=%2Ctr%C3%A1fico -->
+            <div class="collapsible-panel">
+                <p class="enlaceRef" aria-controls="collapsible-content-leyenda" aria-expanded="false">
                     Ver leyenda de colores en Google Maps
-                </a>
-            
+                </p>
+            </div>
+            <div class="collapsible-panel_content" id="collapsible-content-leyenda" aria-hidden="true">
                 <ul title="Leyenda traffiLayer Google Maps">
                     <li style="color: #A92727" data-key="muy_lento">Muy lento</li>
                     <li style="color: #ED4D42" data-key="lento">Lento</li>
                     <li style="color: #FFCF42" data-key="rapido">Rápido</li>
                     <li style="color: #16E098" data-key="muy_rapido">Muy rápido</li>
                 </ul>
+                <ul title="Lista símbolos Google Maps">
+                    <li data-key="crash"><img alt="símbolo accidente"
+                            src="C:\Users\carol\OneDrive - Conselleria d'Educació\huhhuuu\hu\crash.png"
+                            height="40px" />Accidente de tráfico</li>
+                    <li data-key="slowdown"><img alt="símbolo"
+                            src="C:\Users\carol\OneDrive - Conselleria d'Educació\huhhuuu\hu" height="40px" />Reducir la
+                        velocidad</li>
+                    <li data-key="road"><img alt="símbolo"
+                            src="C:\Users\carol\OneDrive - Conselleria d'Educació\huhhuuu\hu\road.png"
+                            height="40px" />Carretera cortada</li>
+                    <li data-key="lane"><img alt="símbolo"
+                            src="C:\Users\carol\OneDrive - Conselleria d'Educació\huhhuuu\hu" height="40px" />Carril
+                        cortado</li>
+                    <li data-key="construction"><img alt="símbolo" src="C:\Users\carol\OneDrive - Conselleria d'Educació\huhhuuu\hu"
+                            height="40px" />Obras</li>
+                    <li data-key="vehicle"><img alt="símbolo" src="C:\Users\carol\OneDrive - Conselleria d'Educació\huhhuuu\hu"
+                            height="40px" />Vehículo averiado</li>
+                    <li data-key="object"><img alt="símbolo" src="C:\Users\carol\OneDrive - Conselleria d'Educació\huhhuuu\hu"
+                            height="40px" />Obstrucción en el carril</li>
+                    <li data-key="trap"><img alt="símbolo" src="C:\Users\carol\OneDrive - Conselleria d'Educació\huhhuuu\hu"
+                            height="40px" />Radar</li>
+                </ul>
             </div>
-            
+
             <div>
                 <a target="_blank" class="enlaceRef"
                     href="https://valencia.opendatasoft.com/explore/dataset/estat-transit-temps-real-estado-trafico-tiempo-real/api/?flg=es-es">
@@ -80,30 +131,53 @@
             <!-- Aqui hay que hacer que el usuario al poner el raton encima le salga un texto de 
                  "el lugar favorito seleccionado sera al que te lleve la pagina al cargar" 
                  y que cuando lo cambie se recargue automaticamente-->
-                 <div>
-                    <select name="Lugares favoritos" id="favoritos" onchange="recargarPagina()">
-                        <option value="Lugar 1">Lugar 1</option>
-                        <option value="Lugar 2">Lugar 2</option>
-                        <option value="Lugar 3">Lugar 3</option>
-                    </select>
-                
-                    <div style="position: relative; display: inline-block;">
-                        <button id="btnFavoritos" data-key="add_favs">
-                            Añade a favoritos
-                        </button>
-                        <span id="tooltip" class="tooltip-text">El lugar favorito seleccionado será al que te lleve la página al cargar</span>
-                    </div>
+            <div>
+                <select name="Lugares favoritos" id="favoritos" onchange="recargarPagina()">
+                    <option value="Lugar 1">Lugar 1</option>
+                    <option value="Lugar 2">Lugar 2</option>
+                    <option value="Lugar 3">Lugar 3</option>
+                </select>
+
+                <div style="position: relative; display: inline-block;">
+                    <button id="btnFavoritos" data-key="add_favs">
+                        Añade a favoritos
+                    </button>
+                    <span id="tooltip" class="tooltip-text">El lugar favorito seleccionado será al que te lleve la
+                        página al cargar</span>
                 </div>
-                
+            </div>
+
         </section>
 
         <section class="grid.item div2">
             <div id="map"></div>
         </section>
     </div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATHGvXCJNdfo1uEgJ4NZNt5Mi5Z8bfqXo&callback=initMap"async defer></script>
+    <!-- AIzaSyATHGvXCJNdfo1uEgJ4NZNt5Mi5Z8bfqXo -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=<->&callback=initMap" async defer></script>
     <script src="js/indexScripts/indexMapaScript.js"></script>
     <script src="js/indexScripts/indexTranslation.js"></script>
+    <script>
+        const menu = document.getElementsByClassName('collapsible-panel')[0];
+        const enlace = document.getElementsByClassName('enlaceRef')[0];
+        const cont = document.getElementById('collapsible-content-leyenda');
+
+        menu.addEventListener("click", menuDesplegable);
+
+        function menuDesplegable() {
+            if (enlace.ariaExpanded == "false") {
+                cont.style.display = "flex";
+                cont.ariaHidden = false;
+                cont.className = "collapsible-panel_content";
+                enlace.ariaExpanded = true;
+            } else {
+                cont.style.display = "none";
+                cont.ariaHidden = true;
+                cont.className = "collapsible-panel_content is-collapse";
+                enlace.ariaExpanded = false;
+            }
+        }
+    </script>
 
 </body>
 
