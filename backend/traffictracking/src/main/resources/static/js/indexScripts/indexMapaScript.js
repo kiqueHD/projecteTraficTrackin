@@ -1,3 +1,25 @@
+// Menús desplegables - Aside
+const menu = document.getElementsByClassName('collapsible-panel')[0];
+const enlace = document.getElementsByClassName('enlaceRef')[0];
+const cont = document.getElementById('collapsible-content-leyenda');
+
+menu.addEventListener("click", menuDesplegable);
+
+function menuDesplegable() {
+    if (enlace.ariaExpanded == "false") {
+        cont.style.display = "flex";
+        cont.ariaHidden = false;
+        cont.className = "collapsible-panel_content";
+        enlace.ariaExpanded = true;
+    } else {
+        cont.style.display = "none";
+        cont.ariaHidden = true;
+        cont.className = "collapsible-panel_content is-collapse";
+        enlace.ariaExpanded = false;
+    }
+}
+
+// Integración del mapa
 let map;
 
 function initMap() {
@@ -160,24 +182,3 @@ function createMarcadores() {
 
 }
 initMap();
-
-// Menúss desplegables - Aside
-const menu = document.getElementsByClassName('collapsible-panel')[0];
-const enlace = document.getElementsByClassName('enlaceRef')[0];
-const cont = document.getElementById('collapsible-content-leyenda');
-
-menu.addEventListener("click", menuDesplegable);
-
-function menuDesplegable() {
-    if (enlace.ariaExpanded == "false") {
-        cont.style.display = "flex";
-        cont.ariaHidden = false;
-        cont.className = "collapsible-panel_content";
-        enlace.ariaExpanded = true;
-    } else {
-        cont.style.display = "none";
-        cont.ariaHidden = true;
-        cont.className = "collapsible-panel_content is-collapse";
-        enlace.ariaExpanded = false;
-    }
-}
