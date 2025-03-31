@@ -44,7 +44,7 @@ public ResponseEntity<?> registerUser(@RequestBody User user) {
     
         if (user.isPresent() && loginUser.getPassword().equals(user.get().getPassword())) {
             Map<String, String> response = new HashMap<>();
-            response.put("redirect", "/?userId=" + user.get().getId() +"&"+ "User_name=" + user.get().getUser_name()); // Pasar id y user name por URL
+            response.put("redirect", "/?userId=" + user.get().getId()); // Pasar id y user name por URL
             return ResponseEntity.ok(response);
         } 
     

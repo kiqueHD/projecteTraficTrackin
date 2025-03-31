@@ -3,9 +3,7 @@ const API_URL = 'http://localhost:8080/lugares-favoritos';
 const params = new URLSearchParams(window.location.search);
 
 // Obtener un parámetro  url
-const nombreUsu = params.get('User_name');
 const userId = params.get('userId');
-console.log("nombre: ", nombreUsu);
 console.log("id: ", userId);
 
 
@@ -25,7 +23,7 @@ document.getElementById("addFav").addEventListener("submit", async function (e) 
         return;
     }
 
-    // Objeto CORRECTO que espera el backend
+    // Objeto Clugar favorito que espera el backend
     const lugarFavorito = {
         nombre: nombreFav,
         latitud: lat,
@@ -42,6 +40,9 @@ document.getElementById("addFav").addEventListener("submit", async function (e) 
         console.error("Error:", error);
         alert("Error al agregar lugar favorito");
     }
+//volver a cargar los lugares favoritos    
+cargarLugaresFavoritos(userId, "favoritos"); 
+
 });
 
 // Función mejorada con manejo de errores
@@ -75,19 +76,49 @@ async function addLugarFavorito(userId, lugar) {
 
 
 
-// Obtener lugares favoritos de un usuario
-async function getLugaresFavoritos(userId) {
-    const response = await fetch(`${API_URL}/usuario/${userId}`);
-    if (!response.ok) throw new Error('No se pudieron obtener los lugares favoritos');
-    return response.json();
-    console.log("Lugares favoritos: ", response.json());
+
+
+cargarLugaresFavoritos(userId, "favoritos"); // Cargar lugares favoritos al cargar la página
+// get de los lugares favoritos
+async function cargarLugaresFavoritos(userId, selectId) {
+    try {
+        const response = await fetch(`${API_URL}/usuario/${userId}`);
+        if (!response.ok) throw new Error('No se pudieron obtener los lugares favoritos');
+
+        const lugares = await response.json();
+        console.log("Lugares favoritos:", lugares);
+
+        let select = document.getElementById(selectId);
+
+        lugares.forEach(lugar => {
+            let opcion = document.createElement("option");
+            opcion.value = `${lugar.latitud},${lugar.longitud},13`; //pasar el zoom del usuario en el momento?
+            opcion.textContent = lugar.nombre;
+            select.appendChild(opcion);
+        });
+    } catch (error) {
+        console.error("Error cargando lugares favoritos:", error);
+    }
 }
 
 
+//para el select--------------------------
+document.getElementById("favoritos").addEventListener("change", function() {
+    let valores = this.value.split(",");
+    if (valores.length === 3) {
+        let lat = parseFloat(valores[0]);
+        let lng = parseFloat(valores[1]);
+        let zoom = parseInt(valores[2]);
+        cambiarVistaMapa(map, lat, lng, zoom);
+    }
+});
 
 
-
-
+function cambiarVistaMapa(mapa, latitud, longitud, zoom) {
+let nuevaUbicacion = new google.maps.LatLng(latitud, longitud);
+mapa.setCenter(nuevaUbicacion);
+mapa.setZoom(zoom);
+}
 
 
 // Actualizar un lugar favorito

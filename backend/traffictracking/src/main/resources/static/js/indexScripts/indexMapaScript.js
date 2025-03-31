@@ -1,7 +1,6 @@
 //variables globales
 map;
 infoWindowFav = null; // Variable global para almacenar la InfoWindowFAv activa
-uno="holaaaa";
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 12,
