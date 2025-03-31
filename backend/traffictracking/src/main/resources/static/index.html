@@ -11,31 +11,6 @@
     <link rel="icon" type="image/png" href="imagenes/logo-prueba_negro.png" type="image/png"
         media="(prefers-color-scheme: light)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <style>
-        .collapsible-panel {
-            border-bottom: 1px solid lightgray;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .collapsible-panel_content {
-            display: flex;
-            flex-direction: column;
-            height: fit-content;
-            transition: height 1s;
-        }
-
-        /* .collapsible-panel .collapsible-panel_content  */
-        #collapsible-content-leyenda {
-            display: none;
-        }
-
-        .is-collapse {
-            height: 0px;
-            transition: height 1s;
-        }
-    </style>
 </head>
 
 <body>
@@ -65,16 +40,15 @@
                     <li style="color: #16E098" data-key="muy_rapido">Muy rápido</li>
                 </ul>
                 <ul title="Lista símbolos Google Maps">
-                    <li data-key="crash"><img alt="símbolo accidente" src="" height="40px" />Accidente de tráfico</li>
-                    <li data-key="slowdown"><img alt="símbolo" src="" height="40px" />Reducir la
-                        velocidad</li>
-                    <li data-key="road"><img alt="símbolo" src="" height="40px" />Carretera cortada</li>
-                    <li data-key="lane"><img alt="símbolo" src="" height="40px" />Carril
+                    <li data-key="crash"><img alt="Señal accidente" src="" height="40px" />Accidente</li>
+                    <li data-key="slowdown"><img alt="Señal congestión" src="" height="40px" />Congestión</li>
+                    <li data-key="road"><img alt="Señal carretera cortada" src="" height="40px" />Carretera cortada</li>
+                    <li data-key="lane"><img alt="Señal carril cortado" src="" height="40px" />Carril
                         cortado</li>
-                    <li data-key="construction"><img alt="símbolo" src="" height="40px" />Obras</li>
-                    <li data-key="vehicle"><img alt="símbolo" src="" height="40px" />Vehículo averiado</li>
-                    <li data-key="object"><img alt="símbolo" src="" height="40px" />Obstrucción en el carril</li>
-                    <li data-key="trap"><img alt="símbolo" src="" height="40px" />Radar</li>
+                    <li data-key="construction"><img alt="Señal obras" src="" height="40px" />Obras</li>
+                    <li data-key="vehicle"><img alt="Señal vehículo averiado" src="" height="40px" />Vehículo averiado</li>
+                    <li data-key="object"><img alt="Señal obejeto en la carretera" src="" height="40px" />Obstrucción en la vía</li>
+                    <li data-key="trap"><img alt="Señal radar" src="" height="40px" />Radar</li>
                 </ul>
             </div>
 
@@ -147,27 +121,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=<->&callback=initMap" async defer></script>
     <script src="js/indexScripts/indexMapaScript.js"></script>
     <script src="js/indexScripts/indexTranslation.js"></script>
-    <script>
-        const menu = document.getElementsByClassName('collapsible-panel')[0];
-        const enlace = document.getElementsByClassName('enlaceRef')[0];
-        const cont = document.getElementById('collapsible-content-leyenda');
-
-        menu.addEventListener("click", menuDesplegable);
-
-        function menuDesplegable() {
-            if (enlace.ariaExpanded == "false") {
-                cont.style.display = "flex";
-                cont.ariaHidden = false;
-                cont.className = "collapsible-panel_content";
-                enlace.ariaExpanded = true;
-            } else {
-                cont.style.display = "none";
-                cont.ariaHidden = true;
-                cont.className = "collapsible-panel_content is-collapse";
-                enlace.ariaExpanded = false;
-            }
-        }
-    </script>
 
 </body>
 

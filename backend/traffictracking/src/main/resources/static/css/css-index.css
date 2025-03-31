@@ -178,3 +178,28 @@ button:hover {
     visibility: visible;
     opacity: 1;
 }
+
+
+.collapsible-panel {
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.collapsible-panel_content {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    transition: height 1s;
+}
+
+/* .collapsible-panel .collapsible-panel_content  */
+#collapsible-content-leyenda {
+    display: none;
+}
+
+.is-collapse {
+    height: 0px;
+    transition: height 1s;
+}

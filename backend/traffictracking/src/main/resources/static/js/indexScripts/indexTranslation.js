@@ -11,7 +11,15 @@ const translations = {
         aeropuerto_barajas: "Aeropuerto Baraja",
         parque_retiro: "Parque Retiro",
         cambiar_ubicacion: "Cambiar ubicación",
-        add_favs: "Añadir a favoritos"
+        add_favs: "Añadir a favoritos",
+        crash:"Accidente",
+        slowdown:"Congestión",
+        road:"Carretera cortada",
+        lane:"Carril cortado",
+        construction:"Obras",
+        vehicle:"Vehículo averiado",
+        object:"Obstrucción en la vía",
+        trap: "Radar"
     },
 
     val: {
@@ -24,7 +32,15 @@ const translations = {
         aeropuerto_barajas: "Aeropuerto Baraja",
         parque_retiro: "Parc Retir",
         cambiar_ubicacion: "Cambiar ubicació",
-        add_favs: "Incloure en favorits"
+        add_favs: "Incloure en favorits",
+        crash:"Accident",
+        slowdown:"Congestió",
+        road:"Carretera tallada",
+        lane:"Carril tallat",
+        construction:"Obres",
+        vehicle:"Vehicle avariat",
+        object: "Objecte en la via",
+        trap: "Radar"
     },
 
     en: {
@@ -37,7 +53,15 @@ const translations = {
         aeropuerto_barajas: "Baraja's Airport",
         parque_retiro: "Retiro's Park",
         cambiar_ubicacion: "Change ubication",
-        add_favs: "Add to favourites"
+        add_favs: "Add to favourites",
+        crash:"Crash",
+        slowdown:"Slowdown",
+        road:"Road closure",
+        lane:"Lane closure",
+        construction:"Construction",
+        vehicle:"Stalled vehicle",
+        object:"Object on road",
+        trap: "Speed trap"
     }
 };
 
