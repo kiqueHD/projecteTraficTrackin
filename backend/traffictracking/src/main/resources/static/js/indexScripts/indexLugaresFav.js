@@ -2,15 +2,14 @@
 const API_URL = 'http://localhost:8080/lugares-favoritos';
 const params = new URLSearchParams(window.location.search);
 
-// Obtener un parámetro  url
+// Obtener un parámetro  url (id usuario psado por el backend)
 const userId = params.get('userId');
-console.log("id: ", userId);
 
 
 document.getElementById("addFav").addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    // Validar que existan los datos necesarios
+    // que no sea null o NaN(not a number)
     if (!userId || isNaN(userId)) {
         alert("ID de usuario inválido");
         return;
@@ -18,7 +17,7 @@ document.getElementById("addFav").addEventListener("submit", async function (e) 
 
     const nombreFav = document.getElementById('nombreLugarFav').value;
 
-    if (infoWindowFav==null) {
+    if (infoWindowFav == null) {
         alert("Debes seleccionar una ubicación en el mapa");
         return;
     }
@@ -35,13 +34,13 @@ document.getElementById("addFav").addEventListener("submit", async function (e) 
         const response = await addLugarFavorito(userId, lugarFavorito);
         console.log("Lugar agregado:", response);
         alert("Lugar favorito agregado correctamente");
-        // Opcional: recargar la lista de lugares
+        //volver a cargar los lugares favoritos    
+        cargarLugaresFavoritos(userId, "favoritos");
     } catch (error) {
         console.error("Error:", error);
         alert("Error al agregar lugar favorito");
     }
-//volver a cargar los lugares favoritos    
-cargarLugaresFavoritos(userId, "favoritos"); 
+
 
 });
 
@@ -103,7 +102,7 @@ async function cargarLugaresFavoritos(userId, selectId) {
 
 
 //para el select--------------------------
-document.getElementById("favoritos").addEventListener("change", function() {
+document.getElementById("favoritos").addEventListener("change", function () {
     let valores = this.value.split(",");
     if (valores.length === 3) {
         let lat = parseFloat(valores[0]);
@@ -115,9 +114,9 @@ document.getElementById("favoritos").addEventListener("change", function() {
 
 
 function cambiarVistaMapa(mapa, latitud, longitud, zoom) {
-let nuevaUbicacion = new google.maps.LatLng(latitud, longitud);
-mapa.setCenter(nuevaUbicacion);
-mapa.setZoom(zoom);
+    let nuevaUbicacion = new google.maps.LatLng(latitud, longitud);
+    mapa.setCenter(nuevaUbicacion);
+    mapa.setZoom(zoom);
 }
 
 

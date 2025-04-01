@@ -1,6 +1,6 @@
 //variables globales
-map;
-infoWindowFav = null; // Variable global para almacenar la InfoWindowFAv activa
+let map;
+let infoWindowFav = null; // Variable global para almacenar la InfoWindowFAv activa
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 12,
@@ -74,30 +74,13 @@ function createMarcadores() {
  * 
  */
     // Marcador de parking----------------------------------------------------------------------------
-    let marcadorParking = new google.maps.Marker({
-        position: { lat: 39.4720, lng: -0.3730 },
-        map: map,
-        title: "Parking",
-        icon: {
-            url: "imagenes/mapIcons/parking_dot.png",
-            scaledSize: new google.maps.Size(40, 40)
-        }
-    });
-
-    let infoParking = new google.maps.InfoWindow({
-        content: "<h4>Parking</h4><p>Nombre: Abastos<br>Direccion: AvenidaJAJAJ 65<br>Plazas totales: 332 <br>Plazas libres: 2<br> Fecha modificación: 1234897/2025 <br> lon:34 <br> lat:22</p>"
-    });
-
-    marcadorParking.addListener("click", () => {
-        infoParking.open(map, marcadorParking);
-    });
-    const apiUrl = "http://localhost:8080/parkings/disponibles";
+    const apiParkingsUrl = "http://localhost:8080/parkings/disponibles";
     /** explicacion flow de fetch a una api q devuelve un json 
        fetch - Initiates the HTTP request
        response - Contains the server's response
        data - The actual JSON data after parsing
      */
-    fetch(apiUrl)
+    fetch(apiParkingsUrl)
         .then(response => response.json())
         .then(data => {
             //results es el nombre del array que contiene los results de parkings data.results para acceder
@@ -108,6 +91,7 @@ function createMarcadores() {
                     map: map,
                     title: parking.nombre,
                     icon: {
+                        
                         url: "imagenes/mapIcons/parking_dot.png",
                         scaledSize: new google.maps.Size(40, 40)
                     }
@@ -136,42 +120,89 @@ function createMarcadores() {
 
     // Marcadores trafico----------------------------------------------------------------------------
 
+    const apiTraffic = "http://localhost:8080/traffic/datos";
+    /**
+     * COLORES
+     * --0 FLUIDO,
+     * 1 DENSO,                  // Amarillo
+     * 2 CONGESTIONADO,          // NARANJA
+     * 3 CORTADO,                // Rojo
+     * --4 SIN_DATOS,
+     * --5 PASO_FLUIDO,
+     * 6 PASO_DENSO:,            // Amarillo
+     * 7 PASO_CONGESTIONADO,     // narnaja
+     * 8 PASO_CORTADO,           // Rojo
+     * --9 PASO_SIN_DATOS
+     */
+    function getTrafficState(estado) {
+        switch (estado) {
+            case 0: return "FLUIDO";
+            case 1: return "DENSO";
+            case 2: return "CONGESTIONADO";
+            case 3: return "CORTADO";
+            case 4: return "SIN DATOS";
+            case 5: return "PASO FLUIDO";
+            case 6: return "PASO DENSO";
+            case 7: return "PASO CONGESTIONADO";
+            case 8: return "PASO CORTADO";
+            case 9: return "PASO SIN DATOS";
+            default: return "ESTADO DESCONOCIDO";
+        }
+    }
+    function getTrafficIcon(estado) {
+        switch (estado) {
+            case 0:
+            case 5:
+                return "imagenes/mapIcons/green-dot2.png";
+            case 1:
+            case 6:
+                return "imagenes/mapIcons/yellow-dot.png";
+            case 2:
+            case 7:
+                return "imagenes/mapIcons/orange-dot.png";
+            case 3:
+            case 8:
+                return "imagenes/mapIcons/red-dot.png";
 
+            default:
+                return "imagenes/lane.png"; // default icon
+        }
+    }
+    fetch(apiTraffic)
+        .then(response => response.json())
+        .then(data => {
+            data.results.forEach(trafficResult => {
+                let marcadorTraffic = new google.maps.Marker({
+                    position: { lat: trafficResult.lat, lng: trafficResult.lon },
+                    map: map,
+                    title: trafficResult.denominacion,
+                    icon: {
+                       
+                        url: getTrafficIcon(trafficResult.estado), // Cambia el icono según el estado
+                        scaledSize: new google.maps.Size(40, 40)
+                    }
+                });
+
+                let infoTraffic = new google.maps.InfoWindow({
+                    content: `
+              <h4>Traffic mark</h4>
+              <p>Nombre: ${trafficResult.denominacion}<br>
+              Estado: ${getTrafficState(trafficResult.estado)}<br>
+              lon: ${trafficResult.lon}<br>lat: ${trafficResult.lat}</p>
+            `
+                });
+
+                marcadorTraffic.addListener("click", () => {
+                    infoTraffic.open(map, marcadorTraffic);
+                });
+            });
+        })
+        .catch(error => console.error('Error al obtener los datos de trafico:', error));
 
 
     // FIN Marcador trafico----------------------------------------------------------------------------
 
-    //----------------------------amarillo----------------------------------------------------------------
-    let marcadorG = new google.maps.Marker({
-        position: { lat: 39.4702, lng: -0.3768 },
-        map: map,
-        title: "Marker",
-        icon: {
-            url: "imagenes/mapIcons/yellow-dot.png", // Ruta local al marcador
-            scaledSize: new google.maps.Size(30, 30) // Puedes ajustar el tamaño
-        }
-    });
-
-    //------------------------------rojo---------------------------------------------------
-    let marcadorRoig = new google.maps.Marker({
-        position: { lat: 39.4720, lng: -0.3740 },
-        map: map,
-        title: "Marker",
-        icon: {
-            url: "imagenes/mapIcons/red-dot.png",
-            scaledSize: new google.maps.Size(30, 30)
-        }
-    });
-    //-------------------------------narnaja--------------------------------------------------
-    let marcadorTaronja = new google.maps.Marker({
-        position: { lat: 39.4740, lng: -0.3720 },
-        map: map,
-        title: "Marcador Taronja",
-        icon: {
-            url: "imagenes/mapIcons/orange-dot.png",
-            scaledSize: new google.maps.Size(30, 30)
-        }
-    });
+   
 
 }
 initMap();
