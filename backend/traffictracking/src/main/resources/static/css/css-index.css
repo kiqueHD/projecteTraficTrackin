@@ -178,7 +178,7 @@ button:hover {
     opacity: 1;
 }
 
-
+/*Menú deplegable*/
 .collapsible-panel {
     border-bottom: 1px solid lightgray;
     display: flex;
