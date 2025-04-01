@@ -201,8 +201,34 @@ function createMarcadores() {
 
 
     // FIN Marcador trafico----------------------------------------------------------------------------
-
-   
+        //para generar datos de trafico aleatorios 
+    function generateTrafficData() {
+        const locations = [
+            "Paiporta",
+            "Benetússer",
+            "Torrent",
+            "Picanya"
+        ];
+    
+        const results = [];
+        
+        locations.forEach(location => {
+            const count = Math.floor(Math.random() * 11) + 10; // Entre 10 y 20 elementos
+            for (let i = 0; i < count; i++) {
+                results.push({
+                    denominacion: `${location} - Calle ${Math.random().toString(36).substr(2, 8).toUpperCase()}`,
+                    estado: Math.floor(Math.random() * 10),
+                    lon: -0.35 + (Math.random() * 0.1 - 0.05), // Longitudes aproximadas
+                    lat: 39.4 + (Math.random() * 0.1 - 0.05)  // Latitudes aproximadas
+                });
+            }
+        });
+    
+        return { results };
+    }
+    
+    // Ejemplo de uso
+    console.log(JSON.stringify(generateTrafficData(), null, 2));
 
 }
 initMap();

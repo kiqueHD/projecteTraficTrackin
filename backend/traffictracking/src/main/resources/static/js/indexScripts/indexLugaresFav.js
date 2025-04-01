@@ -1,4 +1,18 @@
+/** 
+para poner estrllita en el lugar fav seleccionado
+let marcadorFav;
+marcadorFav = new google.maps.Marker({
+    position: { lat: latitud, lng: longitud },
+    map: map,
+    title: "Lugar Favorito",
+    icon: {
+       
+        url: "imagenes/mapIcons/estrellaIconMapa.png", 
+        scaledSize: new google.maps.Size(20, 20)
+    }
+});
 
+*/
 const API_URL = 'http://localhost:8080/lugares-favoritos';
 const params = new URLSearchParams(window.location.search);
 
@@ -94,6 +108,9 @@ async function cargarLugaresFavoritos(userId, selectId) {
             opcion.value = `${lugar.latitud},${lugar.longitud},13`; //pasar el zoom del usuario en el momento?
             opcion.textContent = lugar.nombre;
             select.appendChild(opcion);
+
+           
+
         });
     } catch (error) {
         console.error("Error cargando lugares favoritos:", error);
@@ -117,6 +134,7 @@ function cambiarVistaMapa(mapa, latitud, longitud, zoom) {
     let nuevaUbicacion = new google.maps.LatLng(latitud, longitud);
     mapa.setCenter(nuevaUbicacion);
     mapa.setZoom(zoom);
+   
 }
 
 
