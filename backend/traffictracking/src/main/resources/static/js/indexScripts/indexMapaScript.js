@@ -200,6 +200,39 @@ function createMarcadores() {
         .catch(error => console.error('Error al obtener los datos de trafico:', error));
 
 
+
+        //para marcadores de fake api traffic
+        let fakeapiTraffic = "http://localhost:8081/fakeTrafficAPI?limit=1000";
+        fetch(fakeapiTraffic)
+        .then(response => response.json())
+        .then(data => {
+            data.results.forEach(trafficResult => {
+                let marcadorTraffic = new google.maps.Marker({
+                    position: { lat: trafficResult.lat, lng: trafficResult.lon },
+                    map: map,
+                    title: trafficResult.denominacion,
+                    icon: {
+                       
+                        url: getTrafficIcon(trafficResult.estado), // Cambia el icono según el estado
+                        scaledSize: new google.maps.Size(40, 40)
+                    }
+                });
+
+                let infoTraffic = new google.maps.InfoWindow({
+                    content: `
+              <h4>Traffic mark</h4>
+              <p>Nombre: ${trafficResult.denominacion}<br>
+              Estado: ${getTrafficState(trafficResult.estado)}<br>
+              lon: ${trafficResult.lon}<br>lat: ${trafficResult.lat}<br>FAKE DATA</p>
+            `
+                });
+
+                marcadorTraffic.addListener("click", () => {
+                    infoTraffic.open(map, marcadorTraffic);
+                });
+            });
+        })
+        .catch(error => console.error('Error al obtener los datos de trafico de la fake api, esto es una prueba', error));
     // FIN Marcador trafico----------------------------------------------------------------------------
         //para generar datos de trafico aleatorios 
     function generateTrafficData() {
