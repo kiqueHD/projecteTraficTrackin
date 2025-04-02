@@ -202,7 +202,7 @@ function createMarcadores() {
 
 
         //para marcadores de fake api traffic
-        let fakeapiTraffic = "http://localhost:8081/fakeTrafficAPI?limit=1000";
+        let fakeapiTraffic = "http://localhost:8081/fakeTrafficAPI?limit=100";
         fetch(fakeapiTraffic)
         .then(response => response.json())
         .then(data => {
