@@ -153,7 +153,7 @@ function createMarcadores() {
         switch (estado) {
             case 0:
             case 5:
-                return "imagenes/mapIcons/green-dot2.png";
+                return "imagenes/mapIcons/green-dot4.png";
             case 1:
             case 6:
                 return "imagenes/mapIcons/yellow-dot.png";
