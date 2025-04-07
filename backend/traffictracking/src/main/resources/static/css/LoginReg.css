@@ -13,15 +13,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url(../imagenes/maps-1.jpg);
+    background-image: url(../imagenes/logo_fondo.png) ;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     color: #e2dada;
 }
 
-.container-form {
-    width: 90%;
+.container-form {    width: 90%;
     height: 90vh;
     display: flex;
     justify-content: space-around;
@@ -59,6 +58,9 @@ body {
 
 .message button:hover {
     background-color: #6464f8;
+}
+.formulario button:hover{
+background-color: rgb(238, 241, 245);
 }
 
 .formulario {
