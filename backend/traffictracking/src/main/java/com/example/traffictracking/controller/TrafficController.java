@@ -16,7 +16,7 @@ public class TrafficController {
         this.trafficService = trafficService;
     }
 
-    @GetMapping("/datos")
+    @GetMapping
     public JsonNode obtenerDatosTrafico() {
         return trafficService.obtenerYTransformarJsonTrafico();
     }

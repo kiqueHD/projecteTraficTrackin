@@ -120,7 +120,7 @@ function createMarcadores() {
 
     // Marcadores trafico----------------------------------------------------------------------------
 
-    const apiTraffic = "http://localhost:8080/traffic/datos";
+    const apiTraffic = "http://localhost:8080/traffic";
     /**
      * COLORES
      * --0 FLUIDO,
