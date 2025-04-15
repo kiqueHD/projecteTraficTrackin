@@ -74,7 +74,7 @@ function createMarcadores() {
  * 
  */
     // Marcador de parking----------------------------------------------------------------------------
-    const apiParkingsUrl = "http://localhost:8080/parkings/disponibles";
+    const apiParkingsUrl = "http://localhost:8080/data/parkings";
     /** explicacion flow de fetch a una api q devuelve un json 
        fetch - Initiates the HTTP request
        response - Contains the server's response
@@ -120,7 +120,7 @@ function createMarcadores() {
 
     // Marcadores trafico----------------------------------------------------------------------------
 
-    const apiTraffic = "http://localhost:8080/traffic";
+    const apiTraffic = "http://localhost:8080/data/traffic";
     /**
      * COLORES
      * --0 FLUIDO,
