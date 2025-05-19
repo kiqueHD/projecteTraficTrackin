@@ -18,6 +18,14 @@ public class PageController {
     public String loginReg() {
         return "LoginReg.html"; 
     }
+    @GetMapping("/Login")
+    public String login() {
+        return "LoginReg.html"; 
+    }
+     @GetMapping("/Register")
+    public String register() {
+        return "LoginReg.html"; 
+    }
    
    
 }
