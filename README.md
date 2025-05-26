@@ -79,3 +79,5 @@ URL: http://maps.google.com/mapfiles/ms/icons/red-dot.png
 URL: http://maps.google.com/mapfiles/ms/icons/orange-dot.
 
 url: https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png     Ícono de parking
+
+![alt text](openAPI.png)
