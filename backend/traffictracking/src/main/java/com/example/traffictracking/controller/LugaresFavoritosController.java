@@ -1,13 +1,22 @@
 package com.example.traffictracking.controller;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.traffictracking.model.LugaresFavoritos;
 import com.example.traffictracking.model.User;
 import com.example.traffictracking.repository.LugaresFavoritosRepository;
 import com.example.traffictracking.repository.UserRepository;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/lugares-favoritos")
@@ -23,7 +32,8 @@ public class LugaresFavoritosController {
     
     // Obtener todos los lugares favoritos de un usuario por su id
     @GetMapping("/usuario/{userId}")
-    public ResponseEntity<List<LugaresFavoritos>> getLugaresFavoritosByUserId(@PathVariable Long userId) {
+    public ResponseEntity<List<LugaresFavoritos>> 
+    getLugaresFavoritosByUserId(@PathVariable Long userId) {
         Optional<User> user = userRepository.findById(userId);
         if (user.isPresent()) {
             List<LugaresFavoritos> lugares = repository.findByUsuario(user.get());
