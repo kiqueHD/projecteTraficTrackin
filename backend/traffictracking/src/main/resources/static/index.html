@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -15,9 +15,9 @@
     <header>
         <!-- logo -->
         <h1>TrafficTracking</h1>
-        <img src="imagenes/logo-prueba_blanco.png" alt="Logo Traffic Tracking" height="40px" style="margin-left: 1em;"/>
+        <img src="imagenes/logo-prueba_blanco.png" alt="Traffic Tracking Logo" height="40px" style="margin-left: 1em;"/>
         <select id="language-selector" class="language-selector">
-            <option value="es">Español</option>
+            <option value="es">Spanish</option>
             <option value="en">English</option>
             <option value="val">Valencià</option>
         </select>
@@ -25,88 +25,91 @@
     <div class="parent">
         <section class="grid-item div3">
             <div>
-                <!-- Enlace a la leyenda de colores de Google Maps -->
+                <!-- Link to Google Maps color legend -->
                 <a target="_blank" class="enlaceRef"
-                    href="https://support.google.com/maps/answer/3092439?hl=es&co=GENIE.Platform%3DDesktop#zippy=%2Ctr%C3%A1fico">
-                    Ver leyenda de colores en Google Maps
-                </a>
-
-                <ul title="Leyenda traffiLayer Google Maps">
-                    <li style="color: #A92727" data-key="muy_lento">Muy lento</li>
-                    <li style="color: #ED4D42" data-key="lento">Lento</li>
-                    <li style="color: #FFCF42" data-key="rapido">Rápido</li>
-                    <li style="color: #16E098" data-key="muy_rapido">Muy rápido</li>
-                </ul>
-            </div>
-
-            <div>
-                <a target="_blank" class="enlaceRef"
-                    href="https://valencia.opendatasoft.com/explore/dataset/estat-transit-temps-real-estado-trafico-tiempo-real/api/?flg=es-es">
-                    Traffic Data Valencia (OpenDataSoft)</a>
-
-                <ul title="Leyenda traffic OpenDataSoft">
-                    <li style="color: #A92727" data-key="muy_lento">Muy lento</li>
-                    <li style="color: #ED4D42" data-key="lento">Lento</li>
-                    <li style="color: #FFCF42" data-key="rapido">Rápido</li>
-                    <li style="color: #16E098" data-key="muy_rapido">Muy rápido</li>
+                href="https://support.google.com/maps/answer/3092439?hl=en&co=GENIE.Platform%3DDesktop#zippy=%2Ctr%C3%A1fico">
+                Google Maps Traffic Layer Legend</a>
+                
+                <ul title="Traffic Legend">
+              
                    
+                    
+           
+                </ul>
+              
+            </div>
+            <div>
+                <img src="imagenes/apigugulmaps2.png" alt="Ayta VLC">
+          
+            </div>
+            <div><a style="color: #059400">Traffic Data Valencia    </a>
+                <a target="_blank" class="enlaceRef"
+                    href="https://valencia.opendatasoft.com/explore/dataset/estat-transit-temps-real-estado-trafico-tiempo-real/api/?flg=en-en">
+                    (OpenDataSoft)</a>
+
+                <ul title="Traffic Legend">
+                    <li style="color: #000000">Name</li>
+                    <li style="color: #000000">State</li>
+                    <li style="color: #000000">lon</li>
+                    <li style="color: #000000">lat</li>
+
+           
                 </ul>
             </div>
 
-            <div>
+            <div><a style="color: #026bf57e"> Parking Data Valencia     </a>
                 <a target="_blank" class="enlaceRef"
                     href="https://valencia.opendatasoft.com/explore/dataset/parkings/api/">
-                    Parking Data Valencia (OpenDataSoft)</a>
-                <ul title="Leyenda parkings OpenDataSoft">
-                    <img src="imagenes/mapIcons/parking_dot.png" alt="icon parking" width="100px" height="100px" />
-                    <li style="color: #000000">Nombre</li>
-                    <li style="color: #000000">Plazas totales</li>
-                    <li style="color: #000000">Plazas libres</li>
-                    <li style="color: #000000">Direccion</li>
-                    <li style="color: #000000">Fecha modificación</li>
-                    <li style="color: #000000">Lat</li>
-                    <li style="color: #000000">Lon</li>
-                    
+                   (OpenDataSoft)</a>
+               <ul title="Traffic Legend">
+                    <li style="color: #000000">Name</li>
+                    <li style="color: #000000">Address</li>
+                    <li style="color: #000000">Total Spots</li>
+                    <li style="color: #000000">Available Spots</li>
+                    <li style="color:#000000">Last Modified</li>
+                    <li style="color: #000000">lon</li>
+                    <li style="color: #000000">lat</li>
 
                 </ul>
             </div>
         </section>
 
         <section class="grid-item div1">
-            <div>
-                <select name="ciudades">
-                    <option value="madrid" data-lat="40.416775" data-lng="-3.703790" data-key="madrid_centro">
-                        Madrid Centro</option>
-                    <option value="barajas" data-lat="40.472244" data-lng="-3.560891" data-key="aeropuerto_barajas">
-                        Aeropuerto Barajas</option>
-                    <option value="chamartin" data-lat="40.466443" data-lng="-3.684564">Chamartín</option>
-                    <option value="retiro" data-lat="40.414572" data-lng="-3.681706" data-key="parque_retiro">
-                        Parque Retiro</option>
-                </select>
-
-                <button onclick="" data-key="cambiar_ubicacion">Cambiar ubicación</button>
-            </div>
            
             <div>
-                <select name="Lugares favoritos" id="favoritos">
-                    <option value="39.4699,-0.3763,13" selected>Por defecto(vlc)</option>
+                <select name="Favorite Places" id="favoritos">
+                    <option value="39.4699,-0.3763,13" selected>Valencia</option>
                     <option value="40.4168,-3.7038,13">Madrid</option>
                     <option value="41.3879,2.16992,13">Barcelona</option>
                 </select>
 
                 <div style="position: relative; display: inline-block;">
                     <form id="addFav">
-                    <input type="text" id="nombreLugarFav"title="Escribe el nombre de tu lugar favorito" placeholder="Escribe el nombre del lugar" required>
+                    <input type="text" id="nombreLugarFav"title="Enter the name of your favorite place" placeholder="Enter the name of the place" required>
                     <button type="submit" id="btnFavoritos" data-key="add_favs">
-                        Añade a favoritos
+                        Add to Favorites
                     </button>
-                    <span id="tooltip" class="tooltip-textLugaresFavBtn">Selecciona un lugar en el mapa
-                        (click drecho) y escribe un nombre para él. <br>Será agregado a tus lugares favoritos y al seleccionarlo se enfocará en el mapa.</span>
+                    <span id="tooltip" class="tooltip-textLugaresFavBtn">Select a location on the map
+                        (right click) and enter a name for it. <br>It will be added to your favorite places and selecting it will focus on the map.</span>
                     </form>
 
                 </div>
             </div>
-
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </section>
 
         <section class="grid.item div2">

@@ -26,7 +26,8 @@ public class ParkingsService {
 
             // Iterar y filtrar los datos
             for (JsonNode nodo : resultados) {
-                int plazasLibres = nodo.get("plazaslibr").asInt();
+                //int plazasLibres = nodo.get("plazaslibr").asInt();
+                int plazasLibres = java.util.concurrent.ThreadLocalRandom.current().nextInt(15, 51);
                 if (plazasLibres > 0) { // Solo incluir si hay plazas libres
                     ObjectNode record = objectMapper.createObjectNode();
                     record.put("nombre", nodo.get("nombre").asText());
