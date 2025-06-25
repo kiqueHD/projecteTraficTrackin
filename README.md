@@ -35,7 +35,7 @@ El proyecto simula una solución real para consultar tráfico en tiempo real y a
 
 Puedes ver el video aquí:
 
-![alt text](caputra traffic tracking app.png)
+![alt text](caputratraffictrackingapp.png)
 
 [Ver video en Google Drive](https://drive.google.com/file/d/13LZVlQxOOJ4uM0--UX7TUCGI1rXsAQDy/view?usp=sharing)
 
