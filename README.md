@@ -31,8 +31,13 @@ El proyecto simula una solución real para consultar tráfico en tiempo real y a
 - 🛡️ Validaciones básicas y manejo de errores
 
 ---
+## Video explicativo
+
+Puedes ver el video aquí:
+
+[Ver video en Google Drive](https://drive.google.com/file/d/13LZVlQxOOJ4uM0--UX7TUCGI1rXsAQDy/view?usp=sharing)
 
 
-
-
+---
+## Endpoints y documentacion de la api RESTcon openAPI y swagger
 ![alt text](openAPI.png)
